@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<concrete5-cif version="1.0">
+    <singlepages>
+        <page name="Websocket Dashboard" path="/dashboard/websocket"
+              filename="/dashboard/websocket/view.php" pagetype="" description=""
+              package="concrete_websocket"
+              global="false"
+        />
+    </singlepages>
+</concrete5-cif>

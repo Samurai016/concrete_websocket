@@ -1,0 +1,13 @@
+.error i {
+    cursor: pointer;
+}
+
+.blink {
+  animation: blink 1.8s linear infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}

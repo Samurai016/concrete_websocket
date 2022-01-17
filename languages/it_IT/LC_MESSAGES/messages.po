@@ -1,0 +1,13 @@
+#: packages/community_store/controller.php:22
+msgid "Add a store to your site"
+msgstr "Aggiungi un negozio al tuo sito"
+
+#: packages/community_store/controller.php:27
+msgid "Community Store"
+msgstr "Community Store"
+
+#: packages/community_store/src/CommunityStore/Console/Command/ResetCommand.php:101
+msgid "%d discount deleted"
+msgid_plural "%d discounts deleted"
+msgstr[0] "%d sconto eliminato"
+msgstr[1] "%d sconti eliminati"
