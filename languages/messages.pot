@@ -9,105 +9,105 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "POT-Creation-Date: 2022-01-18T15:16:45+01:00\n"
 "PO-Revision-Date: 2022-01-18T15:16:46+01:00\n"
-"Language: it_IT\n"
+"Language: en_US\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #: packages/concrete_websocket/config/dashboard.xml:8
 msgid "Websocket Dashboard"
-msgstr "Websocket Dashboard"
+msgstr ""
 
 #: packages/concrete_websocket/controller.php:28
 msgid "Concrete Websocket"
-msgstr "Concrete Websocket"
+msgstr ""
 
 #: packages/concrete_websocket/controller.php:33
 msgid "Add websocket support."
-msgstr "Aggiunge il supporto per le WebSocket."
+msgstr ""
 
 #: packages/concrete_websocket/controller.php:60
 msgid "Not logged"
-msgstr "Non loggato"
+msgstr ""
 
 #: packages/concrete_websocket/controllers/single_page/dashboard/websocket.php:33
 #: packages/concrete_websocket/controllers/single_page/dashboard/websocket.php:54
 #: packages/concrete_websocket/controllers/single_page/dashboard/websocket.php:75
 msgid "Process not found."
-msgstr "Processo non trovato."
+msgstr ""
 
 #: packages/concrete_websocket/controllers/single_page/dashboard/websocket.php:36
 msgid "Unable to start process, it is already started."
-msgstr "Impossibile avviare, il processo è già in esecuzione."
+msgstr ""
 
 #: packages/concrete_websocket/controllers/single_page/dashboard/websocket.php:57
 msgid "Unable to stop process, it is already stopped."
-msgstr "Impossibile fermare il processo, è già stato fermato."
+msgstr ""
 
 #: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:15
 msgid "Available processes"
-msgstr "Processi disponibili"
+msgstr ""
 
 #: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:22
 msgid "Name"
-msgstr "Nome"
+msgstr ""
 
 #: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:23
 msgid "Status"
-msgstr "Stato"
+msgstr ""
 
 #: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:24
 msgid "PID"
-msgstr "PID"
+msgstr ""
 
 #: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:40
 msgid "Date"
-msgstr "Data"
+msgstr ""
 
 #: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:41
 msgid "Error"
-msgstr "Errore"
+msgstr ""
 
 #: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:51
 msgid "Remove error"
-msgstr "Rimuovi errore"
+msgstr ""
 
 #: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:66
 msgid "Turned off"
-msgstr "Spento"
+msgstr ""
 
 #: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:68
 #, php-format
 msgid "Running at port %s"
-msgstr "Avviato alla porta %s"
+msgstr ""
 
 #: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:74
 msgid "Start process"
-msgstr "Avvia process"
+msgstr ""
 
 #: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:74
 msgid "Start"
-msgstr "Avvia"
+msgstr ""
 
 #: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:76
 msgid "Stop process"
-msgstr "Ferma processo"
+msgstr ""
 
 #: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:76
 msgid "Stop"
-msgstr "Ferma"
+msgstr ""
 
 #: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:83
 msgid "No process available"
-msgstr "Nessun processo disponibile"
+msgstr ""
 
 #: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:94
 msgid "Errors found"
-msgstr "Son stati trovati degli errori"
+msgstr ""
 
 #: packages/concrete_websocket/websocket/src/Process.php:30
 #, php-format
 msgid "Class %s does not exists."
-msgstr "La classe %s non esiste."
+msgstr ""
 
 #: packages/concrete_websocket/websocket/src/Process.php:73
 msgid "Error while starting process, pid not readable"
-msgstr "Errore durante l'avvio del processo, pid non disponibile."
+msgstr ""

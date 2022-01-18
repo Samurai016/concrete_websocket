@@ -65,7 +65,7 @@ View::element('system_errors', [
                                 <?php if ($process->getStatus() == 'off') { ?>
                                     <?= t("Turned off") ?>
                                 <?php } else { ?>
-                                    <?= sprintf(t("Running at %s"), $process->getPort()) ?>
+                                    <?= sprintf(t("Running at port %s"), $process->getPort()) ?>
                                 <?php } ?>
                             </td>
                             <td><?= implode(',', $process->getPids()); ?></td>

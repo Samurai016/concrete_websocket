@@ -1,0 +1,8 @@
+[2022-01-18 13:51:34][C:\xampp\htdocs\application\websocket\MyWebSocketServer.php] Error: Class 'Concrete\Package\ConcreteWebsocket\Websocket\WebSocketServer' not found in C:\xampp\htdocs\application\websocket\MyWebSocketServer.php:11
+[2022-01-18 13:51:34][C:\xampp\htdocs\application\websocket\MyWebSocketServer.php] Stack trace:
+[2022-01-18 13:51:34][C:\xampp\htdocs\application\websocket\MyWebSocketServer.php] #0 C:\xampp\htdocs\packages\concrete_websocket\websocket\server.php(37): require()
+[2022-01-18 13:51:34][C:\xampp\htdocs\application\websocket\MyWebSocketServer.php] #1 {main}
+[2022-01-18 13:51:48][C:\xampp\htdocs\application\websocket\MyWebSocketServer.php] Error: Class 'Concrete\Package\ConcreteWebsocket\Websocket\WebSocketServer' not found in C:\xampp\htdocs\application\websocket\MyWebSocketServer.php:11
+[2022-01-18 13:51:48][C:\xampp\htdocs\application\websocket\MyWebSocketServer.php] Stack trace:
+[2022-01-18 13:51:48][C:\xampp\htdocs\application\websocket\MyWebSocketServer.php] #0 C:\xampp\htdocs\packages\concrete_websocket\websocket\server.php(37): require()
+[2022-01-18 13:51:48][C:\xampp\htdocs\application\websocket\MyWebSocketServer.php] #1 {main}
