@@ -10,7 +10,6 @@ abstract class Console {
     }
 
     public static function getPhpExecutable() {
-        if (strlen(PHP_BINARY) > 0) return PHP_BINARY;
         return self::isWindows() ? trim(exec('where php')) : substr(trim(exec('whereis php')), 5);
     }
 
@@ -42,10 +41,11 @@ abstract class Console {
     public static function startProcess(...$values) {
         $phpExecutable = self::getPhpExecutable();
         if (self::isWindows()) {
-            $command = sprintf('start cmd /k "' . $phpExecutable . ' "%s" "%s" "%s" "%s"" && exit', ...$values);
-            return pclose(popen($command, "r"));
+            $command = sprintf($phpExecutable.' "%s" "%s" "%s"', ...$values);
+            $command = sprintf('start /b wmic process call create "%s" | find "ProcessId"', $command);
+            return exec($command);
         } else {
-            $command = sprintf($phpExecutable . ' "%s" "%s" "%s" "%s"', ...$values);
+            $command = sprintf($phpExecutable . ' "%s" "%s" "%s"', ...$values);
             return exec($command.' > /dev/null & echo $!');
         }
     }

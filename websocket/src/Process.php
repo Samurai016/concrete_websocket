@@ -58,20 +58,11 @@ class Process {
     }
 
     public function start() {
-        $pidPath = join(DIRECTORY_SEPARATOR, [__DIR__, "pid_" . $this->id . ".txt"]);
-        $output = Console::startProcess(CONCRETE_WS_PATH_START, $this->class, $this->port, $pidPath);
+        $output = Console::startProcess(CONCRETE_WS_PATH_START, $this->class, $this->port);
 
         if (Console::isWindows()) {
-            sleep(1);
-    
-            if (!file_exists($pidPath)) {
-                throw new \Exception(t("Error while starting process, log gile for pid not exists"));
-            }
-    
-            $pidFile = fopen($pidPath, "r") or die(t("Unable to open file!"));
-            $pid = fread($pidFile, filesize($pidPath));
-            fclose($pidFile);
-            unlink($pidPath);
+            preg_match('/ProcessId = (\d+)/m', $output, $matches);
+            $pid = $matches ? $matches[1] : null;
         } else {
             $pid = ctype_digit($output) ? $output : '';
         }
