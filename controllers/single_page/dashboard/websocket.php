@@ -78,10 +78,10 @@ class Websocket extends DashboardPageController {
             $process = new Process($processArray);
             ErrorLogger::remove($process->getClass(), $date);
 
-            return Redirect::to('/dashboard/websocket');
+            die(json_encode(['success' => true]));
         } catch (\Throwable $th) {
-            $this->set('websocketError', $th);
-            $this->view();
+            http_response_code(500);
+            die(json_encode(['success' => false, 'error' => $th->getMessage()]));
         }
     }
 

@@ -48,7 +48,7 @@ View::element('system_errors', [
                                                             <td><?= $date; ?></td>
                                                             <td><?= str_replace("\r\n", "<br/>", $error); ?></td>
                                                             <td>
-                                                                <a title="<?= t('Remove error'); ?>" href="<?= Url::to(sprintf('/dashboard/websocket/delete_error/%s/%s', $process->getId(), $date)) ?>">
+                                                                <a title="<?= t('Remove error'); ?>" onclick="javascript:deleteError(event, this)" href="<?= Url::to(sprintf('/dashboard/websocket/delete_error/%s/%s', $process->getId(), $date)) ?>">
                                                                     <i class="fa fa-trash text-danger"></i>
                                                                 </a>
                                                             </td>
@@ -89,6 +89,20 @@ View::element('system_errors', [
 </div>
 
 <script>
+    function deleteError(e, el) {
+        e.preventDefault();
+        $.ajax({
+            url: $(el).attr('href'),
+            dataType: 'json',
+            success: function() {
+                $(el).closest('tr').remove();
+            },
+            error: function(res, status, err) {
+                alert(`<?= t("Unable to delete error, reload page and retry.\\nError: "); ?>`+res.responseJSON?.error);
+            }
+        });
+    }
+
     $('.error').click(function() {
         $.fn.dialog.open({
             title: `<?= t("Errors found") ?>`,
@@ -98,10 +112,3 @@ View::element('system_errors', [
         });
     });
 </script>
-<?php if (ctype_digit($_GET['p'])) { ?>
-    <script>
-        $(function() {
-            $('tr[process-id=<?= $_GET['p']; ?>] .error').click();
-        });
-    </script>
-<?php } ?>

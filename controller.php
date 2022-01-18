@@ -12,10 +12,9 @@ use URL;
 
 class Controller extends Package
 {
-    // TODO: Traduci in italiano
     protected $pkgHandle = 'concrete_websocket';
     protected $appVersionRequired = '8.0';
-    protected $pkgVersion = '0.0.10';
+    protected $pkgVersion = '1.0.0';
 
     protected $pkgAutoloaderRegistries = [
         'websocket/src' => '\ConcreteWebsocket\Websocket',
