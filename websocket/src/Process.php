@@ -59,7 +59,7 @@ class Process {
 
     public function start() {
         $pidPath = join(DIRECTORY_SEPARATOR, [__DIR__, "pid_" . $this->id . ".txt"]);
-        $output = Console::startProcess(PATH_START, $this->class, $this->port, $pidPath);
+        $output = Console::startProcess(CONCRETE_WS_PATH_START, $this->class, $this->port, $pidPath);
 
         if (Console::isWindows()) {
             sleep(1);

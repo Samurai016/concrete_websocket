@@ -87,11 +87,11 @@ class Websocket extends DashboardPageController {
 
     private function scan() {
         // Scan files
-        $files = PATH_SCAN ? scandir(PATH_SCAN) : [];
+        $files = CONCRETE_WS_PATH_SCAN ? scandir(CONCRETE_WS_PATH_SCAN) : [];
         $processes = array();
         $processesIds = array();
         foreach ($files as $file) {
-            $filePath = realpath(join(DIRECTORY_SEPARATOR, [PATH_SCAN, $file]));
+            $filePath = realpath(join(DIRECTORY_SEPARATOR, [CONCRETE_WS_PATH_SCAN, $file]));
             if (pathinfo($filePath, PATHINFO_EXTENSION) == 'php') {
                 $process = Process::create($filePath);
                 $processes[] = $process;

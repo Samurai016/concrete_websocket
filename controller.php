@@ -49,8 +49,8 @@ class Controller extends Package
         $al->register('css', 'concrete_websocket_css', 'css/concrete_websocket.css', array(), $this);
 
         // Register routes
-        SettingsManager::set('ConcreteCheckWebhook', URL::to('/concrete_websocket/handshake'));
-        Route::register(CONCRETE_CHECK_ENDPOINT, function () {
+        SettingsManager::set('ConcreteCheckWebhook', URL::to(CONCRETE_WS_CONCRETE_CHECK_ENDPOINT));
+        Route::register(CONCRETE_WS_CONCRETE_CHECK_ENDPOINT, function () {
             $user = new User();
 
             if ($user->isRegistered()) {
