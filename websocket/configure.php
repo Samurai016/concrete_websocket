@@ -1,4 +1,4 @@
-<?php
+<?php defined('C5_EXECUTE') or die("Access Denied.");
 
 define('CONCRETE_WS_BASE_PATH', realpath(join(DIRECTORY_SEPARATOR, [__DIR__,'..','..', '..'])));
 define('CONCRETE_WS_PACKAGE_PATH', realpath(join(DIRECTORY_SEPARATOR, [__DIR__, ".."])));

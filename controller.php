@@ -14,7 +14,7 @@ class Controller extends Package
 {
     protected $pkgHandle = 'concrete_websocket';
     protected $appVersionRequired = '8.0';
-    protected $pkgVersion = '1.0.0';
+    protected $pkgVersion = '1.0.1';
 
     protected $pkgAutoloaderRegistries = [
         'websocket/src' => '\ConcreteWebsocket\Websocket',
@@ -34,6 +34,11 @@ class Controller extends Package
 
     public function install()
     {
+        // Check PHP version
+        if (version_compare(phpversion(), '7.0.0', '>') < 0) {
+            throw new \Exception(t('This package requires at least version 7 of PHP'), 1);
+        }
+
         $pkg = parent::install();
         $ci = new ContentImporter();
         $ci->importContentFile($pkg->getPackagePath() . '/config/dashboard.xml');

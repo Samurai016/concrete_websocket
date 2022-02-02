@@ -2,8 +2,6 @@
 
 namespace ConcreteWebsocket\Websocket;
 
-use Log;
-
 abstract class Console {
     public static function isWindows() {
         return str_contains(strtolower(php_uname('a')), 'windows');
