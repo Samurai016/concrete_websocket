@@ -9,12 +9,13 @@ use Concrete\Core\Support\Facade\Route;
 use Concrete\Core\User\User;
 use ConcreteWebsocket\Websocket\Manager\SettingsManager;
 use URL;
+use Database;
 
 class Controller extends Package
 {
     protected $pkgHandle = 'concrete_websocket';
     protected $appVersionRequired = '8.0';
-    protected $pkgVersion = '1.0.1';
+    protected $pkgVersion = '1.0.2';
 
     protected $pkgAutoloaderRegistries = [
         'websocket/src' => '\ConcreteWebsocket\Websocket',
@@ -42,6 +43,10 @@ class Controller extends Package
         $pkg = parent::install();
         $ci = new ContentImporter();
         $ci->importContentFile($pkg->getPackagePath() . '/config/dashboard.xml');
+
+        // Bugfix: Seems that sometimes concrete5 do a rollback on the database after package installation, this fix it
+        $db = Database::connection();
+        $db->commit();
     }
 
     public function on_start() {
