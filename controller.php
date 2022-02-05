@@ -7,15 +7,16 @@ use Concrete\Core\Package\Package;
 use Concrete\Core\Asset\AssetList;
 use Concrete\Core\Support\Facade\Route;
 use Concrete\Core\User\User;
+use Concrete\Core\Support\Facade\Url;
+use Concrete\Core\Support\Facade\Application;
+use ConcreteWebsocket\Websocket\Constants;
 use ConcreteWebsocket\Websocket\Manager\SettingsManager;
-use URL;
-use Database;
 
 class Controller extends Package
 {
     protected $pkgHandle = 'concrete_websocket';
     protected $appVersionRequired = '8.0';
-    protected $pkgVersion = '1.0.2';
+    protected $pkgVersion = '1.0.3';
 
     protected $pkgAutoloaderRegistries = [
         'websocket/src' => '\ConcreteWebsocket\Websocket',
@@ -45,21 +46,22 @@ class Controller extends Package
         $ci->importContentFile($pkg->getPackagePath() . '/config/dashboard.xml');
 
         // Bugfix: Seems that sometimes concrete5 do a rollback on the database after package installation, this fix it
-        $db = Database::connection();
+        $app = Application::getFacadeApplication();
+        $db = $app->make('database')->connection();
         $db->commit();
     }
 
     public function on_start() {
         // Register constants
-        require_once join(DIRECTORY_SEPARATOR, [$this->getPackagePath(), 'websocket', 'configure.php']);
+        Constants::initialize();
 
         // Register assets
         $al = AssetList::getInstance();
         $al->register('css', 'concrete_websocket_css', 'css/concrete_websocket.css', array(), $this);
 
         // Register routes
-        SettingsManager::set('ConcreteCheckWebhook', URL::to(CONCRETE_WS_CONCRETE_CHECK_ENDPOINT));
-        Route::register(CONCRETE_WS_CONCRETE_CHECK_ENDPOINT, function () {
+        SettingsManager::set('ConcreteCheckWebhook', URL::to(Constants::$CONCRETE_CHECK_ENDPOINT));
+        Route::register(Constants::$CONCRETE_CHECK_ENDPOINT, function () {
             $user = new User();
 
             if ($user->isRegistered()) {

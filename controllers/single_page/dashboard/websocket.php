@@ -4,7 +4,11 @@ namespace Concrete\Package\ConcreteWebsocket\Controller\SinglePage\Dashboard;
 
 use Concrete\Core\Page\Controller\DashboardPageController;
 use Concrete\Core\Routing\Redirect;
+use Concrete\Core\File\StorageLocation\StorageLocationFactory;
+use Concrete\Core\File\StorageLocation\Configuration\LocalConfiguration;
+use Concrete\Core\Support\Facade\Application;
 use ConcreteWebsocket\Websocket\Process;
+use ConcreteWebsocket\Websocket\Constants;
 use ConcreteWebsocket\Websocket\ErrorLogger;
 use ConcreteWebsocket\Websocket\Manager\ProcessManager;
 
@@ -13,14 +17,15 @@ class Websocket extends DashboardPageController {
         $processes = $this->scan();
         $errors = ErrorLogger::getAll();
         foreach ($errors as $class => $error) {
-            for ($i=0; $i < count($processes); $i++) { 
-                if ($processes[$i]->getClass()==$class) {
+            for ($i = 0; $i < count($processes); $i++) {
+                if ($processes[$i]->getClass() == $class) {
                     $processes[$i]->setErrors($error);
                     break;
                 }
             }
         }
 
+        $this->set('execAvailable', function_exists('exec'));
         $this->set('processes', $processes);
         $this->requireAsset('css', 'concrete_websocket_css');
     }
@@ -87,12 +92,22 @@ class Websocket extends DashboardPageController {
 
     private function scan() {
         // Scan files
-        $files = CONCRETE_WS_PATH_SCAN ? scandir(CONCRETE_WS_PATH_SCAN) : [];
+        $app = Application::getFacadeApplication();
+        $factory = $app->make(StorageLocationFactory::class);
+        $folder = $factory->fetchByName(Constants::$STORAGE_NAME);
+        if (!$folder) {
+            $configuration = new LocalConfiguration();
+            $configuration->setRootPath(Constants::$PATH_SCAN);
+            $folder = $factory->create($configuration, Constants::$STORAGE_NAME);
+        }
+        $filesystem = $folder->getFileSystemObject();
+
+        $files = $filesystem->listContents('.', false);
         $processes = array();
         $processesIds = array();
         foreach ($files as $file) {
-            $filePath = realpath(join(DIRECTORY_SEPARATOR, [CONCRETE_WS_PATH_SCAN, $file]));
-            if (pathinfo($filePath, PATHINFO_EXTENSION) == 'php') {
+            if ($file['type'] == 'file' && $file['extension'] == 'php') {
+                $filePath = realpath(join(DIRECTORY_SEPARATOR, [Constants::$PATH_SCAN, $file['path']]));
                 $process = Process::create($filePath);
                 $processes[] = $process;
                 $processesIds[] = $process->getClass();

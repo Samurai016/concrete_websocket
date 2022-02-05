@@ -58,7 +58,7 @@ class Process {
     }
 
     public function start() {
-        $output = Console::startProcess(CONCRETE_WS_PATH_START, $this->class, $this->port);
+        $output = Console::startProcess(Constants::$PATH_START, $this->class, $this->port);
 
         if (Console::isWindows()) {
             preg_match('/ProcessId = (\d+)/m', $output, $matches);

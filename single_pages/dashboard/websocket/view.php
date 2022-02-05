@@ -3,9 +3,13 @@
 use Concrete\Core\Support\Facade\Url;
 use Concrete\Core\View\View;
 
+$errors = [];
+if (isset($websocketError)) $errors[] = $websocketError;
+if (!$execAvailable) $errors[] = t("exec is disabled, this prevents websocket servers from starting.\nContact your server administrator and ask them to change this setting.\nConcrete Websocket is safe and open-source, we use exec only and exclusively to start, shut down and control websocket servers.");
+
 View::element('system_errors', [
     'format' => 'block',
-    'error' => isset($websocketError) ? $websocketError : null,
+    'error' => $errors,
     'success' => isset($success) ? $success : null,
     'message' => isset($message) ? $message : null,
 ]);
@@ -71,9 +75,9 @@ View::element('system_errors', [
                             <td><?= implode(',', $process->getPids()); ?></td>
                             <td>
                                 <?php if ($process->getStatus() == 'off') { ?>
-                                    <a class="btn btn-success" title="<?= t("Start process") ?>" href="<?= Url::to('/dashboard/websocket/start/' . $process->getId()) ?>"><?= t("Start") ?></a>
+                                    <a class="btn btn-success text-white <?= $execAvailable ? '' : 'disabled'; ?>" title="<?= t("Start process") ?>" href="<?= Url::to('/dashboard/websocket/start/' . $process->getId()) ?>"><?= t("Start") ?></a>
                                 <?php } else { ?>
-                                    <a class="btn btn-danger" title="<?= t("Stop process") ?>" href="<?= Url::to('/dashboard/websocket/stop/' . $process->getId()) ?>"><?= t("Stop") ?></a>
+                                    <a class="btn btn-danger text-white <?= $execAvailable ? '' : 'disabled'; ?>" title="<?= t("Stop process") ?>" href="<?= Url::to('/dashboard/websocket/stop/' . $process->getId()) ?>"><?= t("Stop") ?></a>
                                 <?php } ?>
                             </td>
                         </tr>
@@ -98,7 +102,7 @@ View::element('system_errors', [
                 $(el).closest('tr').remove();
             },
             error: function(res, status, err) {
-                alert(`<?= t("Unable to delete error, reload page and retry.\\nError: "); ?>`+res.responseJSON?.error);
+                alert(`<?= t("Unable to delete error, reload page and retry.\\nError: "); ?>` + res.responseJSON?.error);
             }
         });
     }

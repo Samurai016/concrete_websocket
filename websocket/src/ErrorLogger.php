@@ -4,8 +4,8 @@ namespace ConcreteWebsocket\Websocket;
 
 abstract class ErrorLogger {
     public static function add(string $error, string $class) {
-        if (!file_exists(CONCRETE_WS_PATH_ERROR)) return;
-        $file = fopen(CONCRETE_WS_PATH_ERROR, "a");
+        if (!static::checkFile()) return;
+        $file = fopen(Constants::$PATH_ERROR, "a");
 
         $lines = explode("\n", $error);
         $date = date('Y-m-d H:i:s');
@@ -19,26 +19,26 @@ abstract class ErrorLogger {
     }
 
     public static function remove(string $class, string $date) {
-        if (!file_exists(CONCRETE_WS_PATH_ERROR)) return;
-        $file = fopen(CONCRETE_WS_PATH_ERROR, "r");
-        if (filesize(CONCRETE_WS_PATH_ERROR)<=0) return;
-        $errors = fread($file, filesize(CONCRETE_WS_PATH_ERROR));
+        if (!static::checkFile()) return;
+        $file = fopen(Constants::$PATH_ERROR, "r");
+        if (filesize(Constants::$PATH_ERROR)<=0) return;
+        $errors = fread($file, filesize(Constants::$PATH_ERROR));
         fclose($file);
 
         $class = str_replace('\\', '\\\\', $class);
         $pattern = sprintf('/\[%s\]\[%s\].+\n?/m', $date, str_replace('/', '\/', $class));
         $errors = preg_replace($pattern, "", $errors);
 
-        $file = fopen(CONCRETE_WS_PATH_ERROR, "w");
+        $file = fopen(Constants::$PATH_ERROR, "w");
         fwrite($file, $errors);
         fclose($file);
     }
 
     public static function getAll() {
-        if (!file_exists(CONCRETE_WS_PATH_ERROR)) return [];
-        $file = fopen(CONCRETE_WS_PATH_ERROR, "r");
-        if (filesize(CONCRETE_WS_PATH_ERROR)<=0) return [];
-        $content = fread($file, filesize(CONCRETE_WS_PATH_ERROR));
+        if (!static::checkFile()) return [];
+        $file = fopen(Constants::$PATH_ERROR, "r");
+        if (filesize(Constants::$PATH_ERROR)<=0) return [];
+        $content = fread($file, filesize(Constants::$PATH_ERROR));
         fclose($file);
 
         $errors = array();
@@ -55,5 +55,14 @@ abstract class ErrorLogger {
             }
         }
         return $errors;
+    }
+
+    private static function checkFile() {
+        if (!file_exists(Constants::$PATH_ERROR)) {
+            $file = fopen(Constants::$PATH_ERROR, 'w');
+            if (!$file) return false;
+            fclose($file);
+        }
+        return true;
     }
 }

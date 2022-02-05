@@ -2,13 +2,13 @@
 
 namespace ConcreteWebsocket\Websocket\Middleware;
 
-use ConcreteWebsocket\Websocket\ErrorLogger;
 use mysqli;
 use Ratchet\ConnectionInterface;
 use Ratchet\MessageComponentInterface;
 use Ratchet\Http\HttpServerInterface;
 use Ratchet\Http\CloseResponseTrait;
 use Psr\Http\Message\RequestInterface;
+use ConcreteWebsocket\Websocket\Constants;
 
 /**
  * A middleware to ensure JavaScript clients connecting are logged in Concrete5.
@@ -34,13 +34,13 @@ class ConcreteCheck implements HttpServerInterface {
             $ch = curl_init();
 
             // I get the domain
-            $databaseConfig = require CONCRETE_WS_PATH_DATABASE;
+            $databaseConfig = require Constants::$PATH_DATABASE;
             if ($databaseConfig) {
                 $config = $databaseConfig['connections'][$databaseConfig['default-connection']];
                 $db = new mysqli($config['server'], $config['username'], $config['password'], $config['database']);
 
                 if ($db) {
-                    $res = $db->query(sprintf("SELECT value FROM %s WHERE field='ConcreteCheckWebhook'", CONCRETE_WS_TABLE_SETTINGS));
+                    $res = $db->query(sprintf("SELECT value FROM %s WHERE field='ConcreteCheckWebhook'", Constants::$TABLE_SETTINGS));
                     if ($res) {
                         $url = $res->fetch_assoc()['value'];
                     }
@@ -53,7 +53,7 @@ class ConcreteCheck implements HttpServerInterface {
                 preg_match_all('/(https?:\/\/.+):\d+/', $request->getUri(), $matches, PREG_SET_ORDER, 0);
                 if (count($matches)<=0)
                     return $this->close($conn, 400);
-                $url = $matches[0][1].'/index.php/'.CONCRETE_WS_CONCRETE_CHECK_ENDPOINT;
+                $url = $matches[0][1].'/index.php/'.Constants::$CONCRETE_CHECK_ENDPOINT;
             }
 
             // I make the request
