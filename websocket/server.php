@@ -13,6 +13,9 @@ use Ratchet\WebSocket\WsServer;
 $class = $argv[1];
 $port = $argv[2];
 
+// Register constants
+Constants::initialize();
+
 try {
     // Load handler
     require $class;
