@@ -11,7 +11,7 @@ use Ratchet\Http\OriginCheck;
 class ExampleSocketServer extends WebSocketServer {
     public static function getMiddlewares() {
         return [
-            new Middleware(OriginCheck::class, 'localhost'),
+            new Middleware(OriginCheck::class, ['localhost']),
             new Middleware(ConcreteCheck::class),
         ];
     }
