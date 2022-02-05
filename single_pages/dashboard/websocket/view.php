@@ -22,7 +22,6 @@ View::element('system_errors', [
         <table class="table table-striped align-middle">
             <thead>
                 <tr>
-                    <th width="20"></th>
                     <th><?= t("Name") ?></th>
                     <th><?= t("Status") ?></th>
                     <th><?= t("PID") ?></th>
@@ -33,37 +32,6 @@ View::element('system_errors', [
                 <?php if (count($processes)) { ?>
                     <?php foreach ($processes as $process) { ?>
                         <tr process-id="<?= $process->getID(); ?>">
-                            <td class="error">
-                                <?php if ($process->getErrors() && count($process->getErrors()) > 0) { ?>
-                                    <i class="fa fa-exclamation-circle text-danger"></i>
-                                    <div class="d-none">
-                                        <div class="popup">
-                                            <table class="table table-striped align-middle">
-                                                <thead>
-                                                    <tr>
-                                                        <th><?= t("Date") ?></th>
-                                                        <th><?= t("Error") ?></th>
-                                                        <th width="50"></th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <?php foreach ($process->getErrors() as $date => $error) { ?>
-                                                        <tr>
-                                                            <td><?= $date; ?></td>
-                                                            <td><?= str_replace("\r\n", "<br/>", $error); ?></td>
-                                                            <td>
-                                                                <a title="<?= t('Remove error'); ?>" onclick="javascript:deleteError(event, this)" href="<?= Url::to(sprintf('/dashboard/websocket/delete_error/%s/%s', $process->getId(), $date)) ?>">
-                                                                    <i class="fa fa-trash text-danger"></i>
-                                                                </a>
-                                                            </td>
-                                                        </tr>
-                                                    <?php } ?>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                <?php } ?>
-                            </td>
                             <td><strong><?= $process->getName(); ?></strong></td>
                             <td>
                                 <?php if ($process->getStatus() == 'off') { ?>
@@ -84,44 +52,10 @@ View::element('system_errors', [
                     <?php } ?>
                 <?php } else {  ?>
                     <tr>
-                        <td colspan="5" class="text-center"><?= t("No process available") ?></td>
+                        <td colspan="4" class="text-center"><?= t("No process available") ?></td>
                     </tr>
                 <?php } ?>
             </tbody>
         </table>
     </div>
 </div>
-
-<script>
-    var currentError;
-
-    function deleteError(e, el) {
-        e.preventDefault();
-        $.ajax({
-            url: $(el).attr('href'),
-            dataType: 'json',
-            success: function() {
-                const popup = $(el).closest('.popup');
-                $(el).closest('tr').remove();
-                $(currentError).find('.popup').html(popup.html());
-                if (popup.find('tbody tr').length <= 0) {
-                    $.fn.dialog.closeTop();
-                    $(currentError).html('');
-                }
-            },
-            error: function(res, status, err) {
-                alert(`<?= t("Unable to delete error, reload page and retry.\\nError: "); ?>` + res.responseJSON?.error);
-            }
-        });
-    }
-
-    $('.error').click(function() {
-        currentError = this;
-        $.fn.dialog.open({
-            title: `<?= t("Errors found") ?>`,
-            width: 'auto',
-            height: 'auto',
-            element: $(this).find('.popup').clone()
-        });
-    });
-</script>

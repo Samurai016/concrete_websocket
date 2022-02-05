@@ -9,21 +9,11 @@ use Concrete\Core\File\StorageLocation\Configuration\LocalConfiguration;
 use Concrete\Core\Support\Facade\Application;
 use ConcreteWebsocket\Websocket\Process;
 use ConcreteWebsocket\Websocket\Constants;
-use ConcreteWebsocket\Websocket\ErrorLogger;
 use ConcreteWebsocket\Websocket\Manager\ProcessManager;
 
 class Websocket extends DashboardPageController {
     public function view() {
         $processes = $this->scan();
-        $errors = ErrorLogger::getAll();
-        foreach ($errors as $class => $error) {
-            for ($i = 0; $i < count($processes); $i++) {
-                if ($processes[$i]->getClass() == $class) {
-                    $processes[$i]->setErrors($error);
-                    break;
-                }
-            }
-        }
 
         $this->set('execAvailable', function_exists('exec'));
         $this->set('processes', $processes);
@@ -69,24 +59,6 @@ class Websocket extends DashboardPageController {
         } catch (\Throwable $th) {
             $this->set('websocketError', $th);
             $this->view();
-        }
-    }
-
-    public function delete_error($id, $date) {
-        $processArray = ProcessManager::getById($id);
-
-        try {
-            if (!$processArray) {
-                throw new \Exception(t("Process not found."));
-            }
-
-            $process = new Process($processArray);
-            ErrorLogger::remove($process->getClass(), $date);
-
-            die(json_encode(['success' => true]));
-        } catch (\Throwable $th) {
-            http_response_code(500);
-            die(json_encode(['success' => false, 'error' => $th->getMessage()]));
         }
     }
 
