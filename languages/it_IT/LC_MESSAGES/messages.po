@@ -1,14 +1,14 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: concrete_websocket 1.0.3.1\n"
+"Project-Id-Version: concrete_websocket 1.0.3.2\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-02-05T15:47:41+01:00\n"
-"PO-Revision-Date: 2022-02-05T15:47:41+01:00\n"
+"POT-Creation-Date: 2022-02-05T22:19:03+01:00\n"
+"PO-Revision-Date: 2022-02-05T22:19:05+01:00\n"
 "Language: it_IT\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
@@ -113,11 +113,11 @@ msgstr "Ferma"
 msgid "No process available"
 msgstr "Nessun processo disponibile"
 
-#: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:105
+#: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:113
 msgid "Unable to delete error, reload page and retry.\\nError: "
 msgstr "Impossibile eliminare l'errore, ricaricare la pagina e riprovare.\\nErrore: "
 
-#: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:112
+#: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:121
 msgid "Errors found"
 msgstr "Son stati trovati degli errori"
 
