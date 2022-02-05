@@ -84,7 +84,7 @@ View::element('system_errors', [
                     <?php } ?>
                 <?php } else {  ?>
                     <tr>
-                        <td colspan="3" class="text-center"><?= t("No process available") ?></td>
+                        <td colspan="5" class="text-center"><?= t("No process available") ?></td>
                     </tr>
                 <?php } ?>
             </tbody>
@@ -93,13 +93,21 @@ View::element('system_errors', [
 </div>
 
 <script>
+    var currentError;
+
     function deleteError(e, el) {
         e.preventDefault();
         $.ajax({
             url: $(el).attr('href'),
             dataType: 'json',
             success: function() {
+                const popup = $(el).closest('.popup');
                 $(el).closest('tr').remove();
+                $(currentError).find('.popup').html(popup.html());
+                if (popup.find('tbody tr').length <= 0) {
+                    $.fn.dialog.closeTop();
+                    $(currentError).html('');
+                }
             },
             error: function(res, status, err) {
                 alert(`<?= t("Unable to delete error, reload page and retry.\\nError: "); ?>` + res.responseJSON?.error);
@@ -108,6 +116,7 @@ View::element('system_errors', [
     }
 
     $('.error').click(function() {
+        currentError = this;
         $.fn.dialog.open({
             title: `<?= t("Errors found") ?>`,
             width: 'auto',
