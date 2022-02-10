@@ -37,20 +37,9 @@ class Process {
         } else { // Either create it
             $process = new self();
 
-            // Search valid port
-            $validPort = null;
-            while (is_null($validPort)) {
-                $port = self::generateRandomPort();
-                if (!is_null(ProcessManager::getByPort($port))) {
-                    $validPort = $port;
-                }
-            }
-
             $process->id = ProcessManager::add([
                 'class' => $class,
-                'port' => $validPort,
             ]);
-            $process->port = $validPort;
             $process->class = $class;
         }
 
@@ -58,6 +47,7 @@ class Process {
     }
 
     public function start() {
+        $this->checkPort();
         $output = Console::startProcess(Constants::$PATH_START, $this->class, $this->port);
 
         if (Console::isWindows()) {
@@ -88,6 +78,24 @@ class Process {
             $this->status = 'off';
             $this->pid = null;
             $this->stopOnDb();
+        }
+    }
+
+    public function checkPort() {
+        if (!$this->port || !Console::isPortFree($this->port)) {
+            // Search valid port
+            $validPort = null;
+            while (is_null($validPort)) {
+                $port = self::generateRandomPort();
+                if (Console::isPortFree($port)) {
+                    $validPort = $port;
+                }
+            }
+
+            $this->port = $validPort;
+            if ($this->id) {
+                ProcessManager::update($this->id, ['port' => $validPort]);
+            }
         }
     }
 

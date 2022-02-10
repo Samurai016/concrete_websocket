@@ -5,7 +5,10 @@ use Concrete\Core\View\View;
 
 $errors = [];
 if (isset($websocketError)) $errors[] = $websocketError;
-if (!$execAvailable) $errors[] = t("exec is disabled, this prevents websocket servers from starting.\nContact your server administrator and ask them to change this setting.\nConcrete Websocket is safe and open-source, we use exec only and exclusively to start, shut down and control websocket servers.");
+if (!$execAvailable) {
+    $errorMessage = t("exec is disabled, this prevents websocket servers from starting.\nContact your server administrator and ask them to change this setting.\nConcrete Websocket is safe and open-source, we use exec only and exclusively to start, shut down and control websocket servers.\nEdit your php.ini file (placed at %s) to enable it, see the FAQs on GitHub to see how to do it.");
+    $errors[] = sprintf($errorMessage, function_exists('php_ini_loaded_file') ? php_ini_loaded_file() : t('unknown path'));
+}
 
 View::element('system_errors', [
     'format' => 'block',
@@ -14,6 +17,16 @@ View::element('system_errors', [
     'message' => isset($message) ? $message : null,
 ]);
 ?>
+
+<div class="ccm-dashboard-header-buttons">
+    <div class="btn-group">
+        <a href="https://github.com/Samurai016/concrete_websocket#readme" target="_blank" title="<?= t("GitHub Page"); ?>" class="btn btn-secondary">
+            <i class="fab fa-github"></i> <?= t("GitHub Page"); ?>
+        </a>
+    </div>
+</div>
+
+
 <div class="row">
     <div class="col-10">
         <h2><?= t("Available processes") ?></h2>
@@ -59,3 +72,16 @@ View::element('system_errors', [
         </table>
     </div>
 </div>
+
+<style>
+    .fab {
+        font-family: 'Font Awesome 5 Brands', 'FontAwesome';
+        -moz-osx-font-smoothing: grayscale;
+        -webkit-font-smoothing: antialiased;
+        display: inline-block;
+        font-style: normal;
+        font-variant: normal;
+        text-rendering: auto;
+        line-height: 1;
+    }
+</style>

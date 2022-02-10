@@ -16,7 +16,7 @@ class Controller extends Package
 {
     protected $pkgHandle = 'concrete_websocket';
     protected $appVersionRequired = '8.0';
-    protected $pkgVersion = '1.0.4';
+    protected $pkgVersion = '1.0.5';
 
     protected $pkgAutoloaderRegistries = [
         'websocket/src' => '\ConcreteWebsocket\Websocket',
@@ -48,7 +48,9 @@ class Controller extends Package
         // Bugfix: Seems that sometimes concrete5 do a rollback on the database after package installation, this fix it
         $app = Application::getFacadeApplication();
         $db = $app->make('database')->connection();
-        $db->commit();
+        if ($db->isTransactionActive()) {
+            $db->commit();
+        }
     }
 
     public function on_start() {

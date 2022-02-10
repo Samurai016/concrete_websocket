@@ -17,7 +17,7 @@ abstract class Console {
         } else {
             $command = sprintf('ps -A | grep "%s "', $pid);
         }
-        return strlen(trim($pid)) > 0 && strlen(trim(exec($command))) > 0;
+        return strlen(trim($pid)) > 0 && str_contains(exec($command), $pid);
     }
 
     public static function isProcessTreeRunning($pids) {
@@ -25,6 +25,15 @@ abstract class Console {
             if (self::isProcessRunning($pid)) return true;
         }
         return false;
+    }
+
+    public static function isPortFree($port) {
+        if (self::isWindows()) {
+            $command = sprintf('netstat -ano | find "%s"', $port);
+        } else {
+            $command = sprintf('netstat -tulpn | grep "%s"', $port);
+        }
+        return !str_contains(exec($command), $port);
     }
 
     public static function killProcess($pid) {

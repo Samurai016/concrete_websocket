@@ -53,3 +53,24 @@ More info [here](http://socketo.me/api/class-Ratchet.WebSocket.WsServer.html#_on
 The `ConcreteCheck` middleware is a built-in middleware in the package.  
 It prevent not-logged users to access the server.
 It works by checking the log status querying a special endpoint defined by the package and by closing the http connection even before the protocol switching.
+
+## FAQ
+
+## I got the `exec` disabled error, how can I enable it?
+Enabling `exec` is crucial for concrete_websocket and enabling it is different between webservers.
+In general, you have to edit your `php.ini` file. Where this file is placed should be showed you by concrete_websocket in the Websocket Dashboard page when it detects that `exec` is disabled.   
+If you don't know where `php.ini` is placed, create a php file and place this code inside:
+```php
+<?php phpinfo(); ?>
+```
+Then run this code and you should see a table with a lot of infos, included the `php.ini` location.  
+
+Once you know where `php.ini` is placed, edit it.  
+You should find a string like this: `disable_functions=...exec,...`  
+Remove `exec` from that list of comma-separated names, save and restart your webserver.
+
+If you use one of the following admin panels, I give you some useful links to follow to edit the `php.ini`:
+* [CPanel](https://docs.cpanel.net/knowledge-base/security/how-to-edit-your-php-ini-file/)
+* [Plesk](https://support.plesk.com/hc/en-us/articles/213936565-How-to-find-and-edit-PHP-configuration-files-in-Plesk-for-a-domain-or-for-global-PHP-handler)
+* ISPConfig
+You can edit php.ini for every site by editing the field `Custom php.ini settings` in the _Options_ tab of the site page.
