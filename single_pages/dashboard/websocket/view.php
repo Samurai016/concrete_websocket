@@ -13,7 +13,7 @@ if (!$execAvailable) {
     }
     $errors[] = sprintf($errorMessage, count($iniPaths) > 0 ? implode(',', $iniPaths) : t('unknown path'));
 }
-var_dump_safe(PHP_INI_SCAN_DIR);
+
 View::element('system_errors', [
     'format' => 'block',
     'error' => $errors,
