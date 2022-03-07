@@ -11,7 +11,6 @@
     <field name="pid" type="string" size="20"></field>
     <field name="port" type="integer" size="5">
       <unsigned />
-      <notnull />
     </field>
     <field name="status" type="string" size="20">
       <default value="off" />

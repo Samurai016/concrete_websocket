@@ -14,7 +14,7 @@ The package is based on [Ratchet PHP](http://socketo.me/), so you can refer to R
 To create a new server:  
 1. Create a file under application/websocket folder, for example `ExampleSocketServer.php`.  
 This file will handle the Websocket requests.
-2. Copy and paste the [example code](https://github.com/Samurai016/concrete_websocket/blob/master/example/ExampleSocketServer.php).
+2. Copy and paste the [example code](https://github.com/Samurai016/concrete_websocket/blob/master/example/websocket/ExampleSocketServer.php).
 3. Go to your website and navigate to `yourdomain/index.php/dashboard/websocket` or use the dashboard left panel to navigate to the Websocket Dashboard.
 4. The package will automatically detect your server class. 
 Start the server clicking on the *Start* button.  
