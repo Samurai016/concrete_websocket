@@ -9,11 +9,11 @@ if (!$execAvailable) {
     $errorMessage = t("exec is disabled, this prevents websocket servers from starting.\nContact your server administrator and ask them to change this setting.\nConcrete Websocket is safe and open-source, we use exec only and exclusively to start, shut down and control websocket servers.\nEdit your php.ini file (placed at %s) to enable it, see the FAQs on GitHub to see how to do it.");
     $iniPaths = [function_exists('php_ini_loaded_file') ? php_ini_loaded_file() : ''];
     if ($extraIni = php_ini_scanned_files()) {
-        $iniPaths = array_merge($iniPaths, explode(",\n", $extraIni));
+        $iniPaths .= ", " . $extraIni;
     }
-    $errors[] = sprintf($errorMessage, count($iniPaths)>0 ? implode(',', $iniPaths) : t('unknown path'));
+    $errors[] = sprintf($errorMessage, count($iniPaths) > 0 ? implode(',', $iniPaths) : t('unknown path'));
 }
-
+var_dump_safe(PHP_INI_SCAN_DIR);
 View::element('system_errors', [
     'format' => 'block',
     'error' => $errors,
