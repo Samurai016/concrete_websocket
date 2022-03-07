@@ -74,3 +74,5 @@ If you use one of the following admin panels, I give you some useful links to fo
 * [Plesk](https://support.plesk.com/hc/en-us/articles/213936565-How-to-find-and-edit-PHP-configuration-files-in-Plesk-for-a-domain-or-for-global-PHP-handler)
 * ISPConfig
 You can edit php.ini for every site by editing the field `Custom php.ini settings` in the _Options_ tab of the site page.
+
+If you've made the changes but don't see them applied to your site, you may need to restart your webserver.

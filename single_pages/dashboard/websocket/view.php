@@ -7,7 +7,11 @@ $errors = [];
 if (isset($websocketError)) $errors[] = $websocketError;
 if (!$execAvailable) {
     $errorMessage = t("exec is disabled, this prevents websocket servers from starting.\nContact your server administrator and ask them to change this setting.\nConcrete Websocket is safe and open-source, we use exec only and exclusively to start, shut down and control websocket servers.\nEdit your php.ini file (placed at %s) to enable it, see the FAQs on GitHub to see how to do it.");
-    $errors[] = sprintf($errorMessage, function_exists('php_ini_loaded_file') ? php_ini_loaded_file() : t('unknown path'));
+    $iniPaths = [function_exists('php_ini_loaded_file') ? php_ini_loaded_file() : ''];
+    if ($extraIni = php_ini_scanned_files()) {
+        $iniPaths = array_merge($iniPaths, explode(",\n", $extraIni));
+    }
+    $errors[] = sprintf($errorMessage, count($iniPaths)>0 ? implode(',', $iniPaths) : t('unknown path'));
 }
 
 View::element('system_errors', [
