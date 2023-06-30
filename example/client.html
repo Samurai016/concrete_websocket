@@ -8,20 +8,31 @@
     <title>Concrete WebSocket client example</title>
 
     <link rel="stylesheet" type="text/css" href="/concrete/themes/dashboard/main.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 
 <body class="text-center p-5">
     <h1>Concrete WebSocket client example</h1>
 
-    <div class="alert alert-primary before-connect">
+    <div class="alert alert-primary mt-3 before-connect">
         The server port is showed in the <b>Status</b> column of the process table. <br>
-        Visit <a title="WebSocket Dashboard" href="/index.php/dashboard/websocket" target="_blank">WebSocket
-            Dashboard</a> to see it.
+        Visit <a title="WebSocket Dashboard" href="/index.php/dashboard/websocket" target="_blank">WebSocket Dashboard</a> to see it.
     </div>
-    <form class="shadow p-3 mb-5 bg-body rounded before-connect" id="connect">
-        <div class="mb-3">
+    <form class="shadow p-3 mb-5 mt-3 bg-body rounded before-connect" id="connect">
+        <div class="mb-3" style="display: none;">
             <label for="port" class="form-label">Server port</label>
             <input type="number" min="29170" max="29998" class="form-control" id="port" placeholder="Server port">
+        </div>
+        <div class="mb-3">
+            <div class="form-group row mb-1">
+                <label for="url" class="form-label col-4 d-flex align-items-center justify-content-center m-0">Server url</label>
+                <input type="url" class="form-control col-8" id="url" placeholder="Server url">
+            </div>
+            <p class="mb-1">or</p>
+            <div class="form-group row">
+                <label for="port" class="form-label col-4 d-flex align-items-center justify-content-center m-0">Server port</label>
+                <input type="number" min="29170" max="29998" class="form-control col-8" id="port" placeholder="Server port">
+            </div>
         </div>
         <button class="btn btn-success text-white" id="connect-submit">Connect to WebSocket server</button>
     </form>
@@ -40,9 +51,13 @@
 
     <style>
         body>*:not(h1) {
-            max-width: 500px;
+            max-width: 800px;
             margin: 0 auto;
             margin-top: 50px;
+        }
+
+        body form {
+            max-width: 500px;
         }
 
         .hide {
@@ -81,6 +96,7 @@
         const connect = document.getElementById('connect');
         const connectSubmit = document.getElementById('connect-submit');
         const port = document.getElementById('port');
+        const url = document.getElementById('url');
 
         const send = document.getElementById('send');
         const sendSubmit = document.getElementById('send-submit');
@@ -117,14 +133,20 @@
 
         connect.addEventListener('submit', function (e) {
             e.preventDefault();
-            if (port.value < 29170 || port.value > 29998) {
-                alert('Insert a valid port');
-                return;
+            let wsUrl = '';
+            if (url.value) {
+                wsUrl = url.value;
+            } else {
+                if (port.value < 29170 || port.value > 29998) {
+                    alert('Insert a valid port');
+                    return;
+                }
+    
+                const protocol = location.protocol === 'https:' ? 'wss' : 'ws';
+                wsUrl = `${protocol}://${location.hostname}:${port.value}`;
             }
-
-            const url = `ws://${location.hostname}:${port.value}`;
             connectSubmit.textContent = 'Connecting...';
-            socket = new WebSocket(url);
+            socket = new WebSocket(wsUrl);
             socket.addEventListener('error', function (event) {
                 alert('Error while connecting to server, see to console for debug.');
                 console.error(event);
@@ -138,7 +160,7 @@
                 newLog(event.data, 'received');
             });
             socket.addEventListener('open', function (event) {
-                newLog(`Connected to ${url}`, 'status');
+                newLog(`Connected to ${wsUrl}`, 'status');
                 hideBefore();
             });
         });

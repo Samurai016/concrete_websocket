@@ -8,7 +8,7 @@ abstract class Console {
     }
 
     public static function getPhpExecutable() {
-        return self::isWindows() ? trim(exec('where php')) : substr(trim(exec('whereis php')), 5);
+        return self::isWindows() ? trim(exec('where php')) : PHP_BINDIR.'/php';
     }
 
     public static function isProcessRunning($pid) {

@@ -2,22 +2,19 @@
 
 namespace ConcreteWebsocket\Websocket;
 
-// Load libraries
-require_once join(DIRECTORY_SEPARATOR, [__DIR__, 'vendor', 'autoload.php']);
-
-use Ratchet\Server\IoServer;
-use Ratchet\Http\HttpServer;
-use Ratchet\WebSocket\WsServer;
 use mysqli;
 
-// Load args
-$class = $argv[1];
-$port = $argv[2];
-
-// Register constants
-Constants::initialize();
-
 try {
+    // Load libraries
+    require_once join(DIRECTORY_SEPARATOR, [__DIR__, 'vendor', 'autoload.php']);
+
+    // Load args
+    $class = $argv[1];
+    $port = $argv[2];
+
+    // Register constants
+    Constants::initialize();
+
     // Load handler
     require $class;
     $classes = get_declared_classes();
@@ -30,7 +27,7 @@ try {
     }
 
     // Build server
-    $wsServer =  new WsServer(
+    $wsServer =  new \Ratchet\WebSocket\WsServer(
         new $classPath()
     );
 
@@ -42,8 +39,8 @@ try {
         $wsServer = $reflect->newInstanceArgs($params);
     }
 
-    $server = IoServer::factory(
-        new HttpServer(
+    $server = \Ratchet\Server\IoServer::factory(
+        new \Ratchet\Http\HttpServer(
             $wsServer
         ),
         $port
@@ -52,7 +49,13 @@ try {
     echo "Server running on localhost:" . $port . "\n";
     $server->run();
 } catch (\Throwable $th) {
-    // Log errors
+    // Log errors to file
+    $logFile = 'debug.log';
+    $log = fopen($logFile, 'a');
+    fwrite($log, $th->__toString());
+    fclose($log);
+
+    // Log errors to database
     $databaseConfig = require Constants::$PATH_DATABASE;
     if ($databaseConfig) {
         $config = $databaseConfig['connections'][$databaseConfig['default-connection']];
