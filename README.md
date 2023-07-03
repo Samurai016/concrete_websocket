@@ -15,7 +15,7 @@
 ## 📚 Usage
 Run a custom WebSocket server effortlessly with our package. Based on [Ratchet PHP](http://socketo.me/), it opens up a world of real-time possibilities for your Concrete CMS site. 🚀  
 > ⚠️ **Warning!**  
-> The websocket server are run outside Concrete environment, so, in the server class, you can't use classes or methods from the Concrete environment.
+> The websocket servers are run outside Concrete environment, so, in the server class, you can't use classes or methods from the Concrete environment.
 
 Follow our [example README](https://github.com/Samurai016/concrete_websocket/blob/master/example/README.md) to create a custom WebSocket server.
 
