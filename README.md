@@ -1,84 +1,92 @@
-# Concrete Websocket
-![Last release](https://img.shields.io/github/v/release/Samurai016/concrete_websocket?style=flat-square)  
-A plugin to add support for WebSocket to [Concrete CMS](https://www.concretecms.com/) (known also as concrete5)
+# 🌐🧱 Concrete Websocket 🚀
+![Last release](https://img.shields.io/github/v/release/Samurai016/concrete_websocket?style=flat-square)
+![License](https://img.shields.io/github/license/Samurai016/concrete_websocket?style=flat-square)
+![Concrete CMS 8](https://img.shields.io/badge/Concrete%20CMS%208-c?style=flat-square&labelColor=%23017ddd&color=017ddd&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNSAyOSI+PGcgZGF0YS1uYW1lPSJMaXZlbGxvIDIiPjxwYXRoIGQ9Ik0xNyAyOGExMSAxMSAwIDAgMS0zIDEgMTIgMTIgMCAwIDEtOS0zYy0zLTItMy01LTEtOCAyLTIgNS0zIDgtMyAyIDAgOCAwIDYgMy0xIDMtNSAwLTggMS0yIDEtMyA0IDAgNmE2IDYgMCAwIDAgNi0xYzItMSA2LTggOS01IDEgMS02IDgtOCA5TTAgMTBsMS0zIDIgMyAxIDctNC03bTYtN2MxLTIgMiAwIDIgMnMzIDkgMSA5LTMtNy0zLThWM204LTMgMSA0YzAgMSAwIDEwLTEgOUwxMiAzYzAtMiAwLTMgMi0zbTQgNiAxLTNjMi0xIDIgMiAyIDNzLTEgOS0zIDljLTItMSAwLTggMC05IiBkYXRhLW5hbWU9IkxpdmVsbG8gMSIgc3R5bGU9ImZpbGw6I2ZmZjtmaWxsLXJ1bGU6ZXZlbm9kZCIvPjwvZz48L3N2Zz4=)
+![Concrete CMS 9](https://img.shields.io/badge/Concrete%20CMS%209-c?style=flat-square&labelColor=%23017ddd&color=017ddd&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNSAyOSI+PGcgZGF0YS1uYW1lPSJMaXZlbGxvIDIiPjxwYXRoIGQ9Ik0xNyAyOGExMSAxMSAwIDAgMS0zIDEgMTIgMTIgMCAwIDEtOS0zYy0zLTItMy01LTEtOCAyLTIgNS0zIDgtMyAyIDAgOCAwIDYgMy0xIDMtNSAwLTggMS0yIDEtMyA0IDAgNmE2IDYgMCAwIDAgNi0xYzItMSA2LTggOS01IDEgMS02IDgtOCA5TTAgMTBsMS0zIDIgMyAxIDctNC03bTYtN2MxLTIgMiAwIDIgMnMzIDkgMSA5LTMtNy0zLThWM204LTMgMSA0YzAgMSAwIDEwLTEgOUwxMiAzYzAtMiAwLTMgMi0zbTQgNiAxLTNjMi0xIDIgMiAyIDNzLTEgOS0zIDljLTItMSAwLTggMC05IiBkYXRhLW5hbWU9IkxpdmVsbG8gMSIgc3R5bGU9ImZpbGw6I2ZmZjtmaWxsLXJ1bGU6ZXZlbm9kZCIvPjwvZz48L3N2Zz4=)   
 
-## Installation
-* Download the [latest release](https://github.com/Samurai016/concrete_websocket/releases/latest) package (*concrete_websocket.zip*)
-* Unzip the package in your /packages directory
-* Visit your website's "Extend Concrete" page 
-* Install the package.
+**Add blazing-fast WebSocket support to Concrete CMS with ease! 🌈**
 
-## Usage
-The package provide an interface to run a custom WebSocket server.  
-The package is based on [Ratchet PHP](http://socketo.me/), so you can refer to Ratchet documentation for more details.
-> **Warning!** The websocket server are run outside Concrete environment, so, in the server class, you can't use classes or methods from the Concrete environment.
+## 🚀 Installation
+📥 Download the [latest release](https://github.com/Samurai016/concrete_websocket/releases/latest) package (*concrete_websocket.zip*)  
+📂 Unzip the package in your /packages directory  
+🌐 Visit your website's "Extend Concrete" page  
+🚀 Install the package.  
 
-Refer to [example README](https://github.com/Samurai016/concrete_websocket/blob/master/example/README.md) to create a custom WebSocket server.
+## 📚 Usage
+Run a custom WebSocket server effortlessly with our package. Based on [Ratchet PHP](http://socketo.me/), it opens up a world of real-time possibilities for your Concrete CMS site. 🚀  
+> ⚠️ **Warning!**  
+> The websocket server are run outside Concrete environment, so, in the server class, you can't use classes or methods from the Concrete environment.
 
-### Dashboard explaining
+Follow our [example README](https://github.com/Samurai016/concrete_websocket/blob/master/example/README.md) to create a custom WebSocket server.
+
+### 📊 Dashboard explaining
 The package will automatically detect your server classes.  
-* **Start** the server clicking on the *Start* button.  
-Now you can connect to your server through *ws://yourdomain:port/*
-* **Stop** the server by clicking the *Stop* button.  
-* **Restart** the server by clicking the *Restart* button.  
+* 🟢 **Start**: Click the *Start* button to launch the server.  
+Now you can connect to your server via *ws://yourdomain:port/*
+* 🔴 **Stop**: Click the *Stop* button to halt the server.
+* 🔄 **Restart**: Click the *Restart* button to relaunch the server.
 
 The **PID** column of the table is meant to be used for debugging and/or to track the process on your server.
 
-## WebSocketServer class
+## 🔧 WebSocketServer class
 
-## Middlewares
-When a new connection arrive to the server, it will run the middlwares defined by the `getMiddlewares()` function, they are run from top to bottom (LIFO queue).
-Every middleware is defined by a [`Middleware`](https://github.com/Samurai016/concrete_websocket/blob/master/websocket/src/middleware/Middleware.php) object, which is composed by:
+## 💡 Middlewares
+New connections pass through the `getMiddlewares()` function, that returns an array of middlewares that are run as a LIFO queue (top to bottom).  
+
+Each middleware is defined by a [`Middleware`](https://github.com/Samurai016/concrete_websocket/blob/master/websocket/src/middleware/Middleware.php) object comprising:
 * `$class`: a class that must implements `Ratchet\Http\HttpServerInterface` interface.
-* `$params`: an array of params that will be passed to the `$class` constructor when the middlware is build (when the server is started from the dashboard).
+* `$params`: an array of params passed to the `$class` constructor when the middleware is built (on server start from the dashboard).
 
 ### `ConcreteAuthentication` Middleware
-The `ConcreteAuthentication` middleware is a built-in middleware in the package.  
-It prevent not-logged users to access the server.
-It works by checking the log status querying a special endpoint defined by the package and by closing the http connection even before the protocol switching.
+The `ConcreteAuthentication` middleware restricts server access to logged-in users.
+It checks the log status by querying a special endpoint defined by the package and closes the HTTP connection before protocol switching.
 
-### On Open
-After the middlewares, if the http connection is successful, the server switch to WebSocket protocol and the `onOpen` method is run.
-The base server `onOpen` method add the connection to the array of connected clients. So, if you want to attach a connection you can do it directly or by calling `parent::onOpen($conn);`.
+### 🔧 On Open
+After the middlewares, the server switches to the WebSocket protocol, and the `onOpen` method is executed.
+The base server's `onOpen` method adds the connection to the array of connected clients.  
+To attach a connection, you can do it directly or by calling `parent::onOpen($conn);`.
 
 More info [here](http://socketo.me/api/class-Ratchet.WebSocket.WsServer.html#_onOpen);
 
-### On Message
+### 🔧 On Message
 Every time a message is sent from clients, the `onMessage` function is run.  
 
 More info [here](http://socketo.me/api/class-Ratchet.WebSocket.WsServer.html#_onMessage);
 
-### On Error
+### 🔧 On Error
 Every time an error occurs, the `onError` function is run.  
 
 More info [here](http://socketo.me/api/class-Ratchet.WebSocket.WsServer.html#_onError);
 
-### On Close
+### 🔧 On Close
 Every time a connection is closed, the `onClose` function is run.  
 The base server `onClose` method remove the connection from the array of connected clients. So, if you want to detach a connection you can do it directly or by calling `parent::onClose($conn);`.
 
 More info [here](http://socketo.me/api/class-Ratchet.WebSocket.WsServer.html#_onClose);
 
-## FAQ
+## 🤔 FAQ
 
-## I got the `exec` disabled error, how can I enable it?
-Enabling `exec` is crucial for concrete_websocket and enabling it is different between webservers.
-In general, you have to edit the `disable_functions` in your `php.ini` configuration file, but refers to your webserver documentation for more informations.
+## ❓ I got the `exec` disabled error, how can I enable it?
+Enabling `exec` is crucial for concrete_websocket, and the method to enable it varies among webservers.  
 
-If you use one of the following admin panels, I give you some useful links to follow to edit the `php.ini`:
-* [CPanel](https://docs.cpanel.net/knowledge-base/security/how-to-edit-your-php-ini-file/)
-* [Plesk](https://support.plesk.com/hc/en-us/articles/213936565-How-to-find-and-edit-PHP-configuration-files-in-Plesk-for-a-domain-or-for-global-PHP-handler)
-* ISPConfig
-You can edit php.ini for every site by editing the field `Custom php.ini settings` in the _Options_ tab of the site page.
+In general, you have to edit the `disable_functions` directive in your `php.ini` configuration file.  
+Refer to your webserver's documentation for more information.
 
-If you've made the changes but don't see them applied to your site, you may need to restart your webserver.
+If you use one of the following admin panels, here are some useful links to edit the `php.ini`:
+* [🛠️ CPanel](https://docs.cpanel.net/knowledge-base/security/how-to-edit-your-php-ini-file/)
+* [🛠️ Plesk](https://support.plesk.com/hc/en-us/articles/213936565-How-to-find-and-edit-PHP-configuration-files-in-Plesk-for-a-domain-or-for-global-PHP-handler)
+* 🛠️ ISPConfig  
+You can edit php.ini for each site by modifying the field `Custom php.ini settings` in the _Options_ tab of the site page.
 
-## I am unable to connect to websocket due to insecure connection  
-When you try to connect to a `ws://` unsecure connection from a `https://` secure connection, you may run into the following error message in the console:
-```
+If you've made the changes but don't see them applied to your site, you may need to restart your webserver. 🔄
+
+## ❌ I am unable to connect to websocket due to insecure connection  
+When you try to connect to a `ws://` unsecure connection from an `https://` secure connection, you may run into the following error message in the console:
+```text
 Mixed Content: The page at '...' was loaded over HTTPS, but attempted to connect to the insecure WebSocket endpoint 'ws://...'. This request has been blocked; this endpoint must be available over WSS.
 ```
-This is because your browser prevent running unsecure connection from a secure environment.
+This is because your browser prevent running unsecure connection from a secure environment.  
+
 The easiest way to solve this is to configure a proxy server.
 
 For Apache server (source: [StackOverflow](https://stackoverflow.com/questions/16979793/php-ratchet-websocket-ssl-connect#answer-28393526)):
@@ -92,6 +100,6 @@ For Apache server (source: [StackOverflow](https://stackoverflow.com/questions/1
   ```bash
   sudo systemctl restart apache2
   ```
-* Now instead of connecting to `wss://yourdomain.com:port/`, connecto to `wss://yourdomain.com/wss` (no port and add the `/wss` path)
+* Now, instead of connecting to `wss://yourdomain.com:port/`, connect to `wss://yourdomain.com/wss` (without specifying the port and add the /wss path) 🔒
 
-For Nginx user maybe [this solution](https://stackoverflow.com/questions/16979793/php-ratchet-websocket-ssl-connect#answer-43012985) could work but I not tested it personally so I don't guarantee.
+For Nginx users, [this solution](https://stackoverflow.com/questions/16979793/php-ratchet-websocket-ssl-connect#answer-43012985) may work, but I haven't personally tested it, so I can't guarantee its effectiveness. 🚀
