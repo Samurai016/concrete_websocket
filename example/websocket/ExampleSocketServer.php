@@ -3,7 +3,7 @@
 namespace Application\Websocket;
 
 use ConcreteWebsocket\Websocket\WebSocketServer;
-use ConcreteWebsocket\Websocket\Middleware\ConcreteCheck;
+use ConcreteWebsocket\Websocket\Middleware\ConcreteAuthentication;
 use ConcreteWebsocket\Websocket\Middleware\Middleware;
 use Ratchet\ConnectionInterface;
 use Ratchet\Http\OriginCheck;
@@ -12,7 +12,7 @@ class ExampleSocketServer extends WebSocketServer {
     public static function getMiddlewares() {
         return [
             new Middleware(OriginCheck::class, ['localhost']),
-            new Middleware(ConcreteCheck::class),
+            new Middleware(ConcreteAuthentication::class),
         ];
     }
 

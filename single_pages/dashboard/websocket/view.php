@@ -3,23 +3,13 @@
 use Concrete\Core\Support\Facade\Url;
 use Concrete\Core\View\View;
 
-$errors = [];
-if (isset($websocketError)) $errors[] = $websocketError;
-if (!$execAvailable) {
-    $errorMessage = t("exec is disabled, this prevents websocket servers from starting.\nContact your server administrator and ask them to change this setting.\nConcrete Websocket is safe and open-source, we use exec only and exclusively to start, shut down and control websocket servers.\nEdit your php.ini file (placed at %s) to enable it, see the FAQs on GitHub to see how to do it.");
-    $iniPaths = [function_exists('php_ini_loaded_file') ? php_ini_loaded_file() : ''];
-    if ($extraIni = php_ini_scanned_files()) {
-        $iniPaths .= ", " . $extraIni;
-    }
-    $errors[] = sprintf($errorMessage, count($iniPaths) > 0 ? implode(',', $iniPaths) : t('unknown path'));
-}
-
 View::element('system_errors', [
     'format' => 'block',
     'error' => $errors,
-    'success' => isset($success) ? $success : null,
     'message' => isset($message) ? $message : null,
 ]);
+
+$app = \Concrete\Core\Support\Facade\Application::getFacadeApplication();
 ?>
 
 <div class="ccm-dashboard-header-buttons">
@@ -31,9 +21,9 @@ View::element('system_errors', [
 </div>
 
 
-<div class="row">
-    <div class="col-10">
-        <h2><?= t("Available processes") ?></h2>
+<div class="row" id="processes">
+    <div class="col-12">
+        <h3><?= t("Available processes") ?></h3>
     </div>
     <div class="col-12">
         <table class="table table-striped align-middle">
@@ -41,28 +31,49 @@ View::element('system_errors', [
                 <tr>
                     <th><?= t("Name") ?></th>
                     <th><?= t("Status") ?></th>
+                    <th><?= t("Port") ?></th>
                     <th><?= t("PID") ?></th>
                     <th width="120"></th>
                 </tr>
             </thead>
             <tbody>
-                <?php if (count($processes)) { ?>
+                <?php if (is_array($processes) && count($processes) > 0) { ?>
                     <?php foreach ($processes as $process) { ?>
                         <tr process-id="<?= $process->getID(); ?>">
-                            <td><strong><?= $process->getName(); ?></strong></td>
+                            <td><strong title="<?= $process->getClass(); ?>"><?= $process->getName(); ?></strong></td>
                             <td>
                                 <?php if ($process->getStatus() == 'off') { ?>
                                     <?= t("Turned off") ?>
                                 <?php } else { ?>
-                                    <?= sprintf(t("Running at port %s"), $process->getPort()) ?>
+                                    <?= sprintf(t("Running"), $process->getPort()) ?>
                                 <?php } ?>
                             </td>
+                            <td class="port-cell">
+                                <div>
+                                    <span><?= $process->getPort(); ?></span>
+                                    <button class="btn btn-info">
+                                        <i class="fa fa-pencil"></i>
+                                    </button>
+                                </div>
+                                <form action="<?= $this->action('edit/' . $process->getID()); ?>" method="post">
+                                    <?= $token->output('concrete_websocket_process_form_'.$process->getID()); ?>
+                                    <input type="number" step="1" min="1024" max="65535" name="port" value="<?= $process->getPort(); ?>" class="form-control">
+
+                                    <button type="reset" class="btn btn-danger">
+                                        <i class="fa fa-times"></i>
+                                    </button>
+                                    <button type="submit" class="btn btn-success">
+                                        <i class="fa fa-save"></i>
+                                    </button>
+                                </form>
+                            </td>
                             <td><?= implode(',', $process->getPids()); ?></td>
-                            <td>
+                            <td style="white-space:nowrap;">
                                 <?php if ($process->getStatus() == 'off') { ?>
-                                    <a class="btn btn-success text-white <?= $execAvailable ? '' : 'disabled'; ?>" title="<?= t("Start process") ?>" href="<?= Url::to('/dashboard/websocket/start/' . $process->getId()) ?>"><?= t("Start") ?></a>
+                                    <a class="btn btn-success text-white <?= $canExec ? '' : 'disabled'; ?>" title="<?= t("Start process") ?>" href="<?= Url::to('/dashboard/websocket/start/' . $process->getId()) ?>"><?= t("Start") ?></a>
                                 <?php } else { ?>
-                                    <a class="btn btn-danger text-white <?= $execAvailable ? '' : 'disabled'; ?>" title="<?= t("Stop process") ?>" href="<?= Url::to('/dashboard/websocket/stop/' . $process->getId()) ?>"><?= t("Stop") ?></a>
+                                    <a class="btn btn-danger text-white <?= $canExec ? '' : 'disabled'; ?>" title="<?= t("Stop process") ?>" href="<?= Url::to('/dashboard/websocket/stop/' . $process->getId()) ?>"><?= t("Stop") ?></a>
+                                    <a class="btn btn-warning text-white <?= $canExec ? '' : 'disabled'; ?>" title="<?= t("Restart process") ?>" href="<?= Url::to('/dashboard/websocket/restart/' . $process->getId()) ?>"><?= t("Restart") ?></a>
                                 <?php } ?>
                             </td>
                         </tr>
@@ -77,6 +88,29 @@ View::element('system_errors', [
     </div>
 </div>
 
+<hr>
+
+<div class="row" id="settings">
+    <div class="col-12">
+        <h3><?= t("Settings") ?></h3>
+    </div>
+    <form class="col-12" action="<?= $this->action('settings'); ?>" method="post">
+        <?= $token->output('concrete_websocket_settings_form'); ?>
+
+        <div class="form-group">
+            <label for="<?= CONCRETEWEBSOCKET_SETTINGS_API_PASSWORD; ?>" class="control-label col-sm-3"><?= t("REST API Password") ?></label>
+            <div class="col-sm-9">
+                <div class="input-group">
+                    <input type="text" id="<?= CONCRETEWEBSOCKET_SETTINGS_API_PASSWORD; ?>" name="<?= CONCRETEWEBSOCKET_SETTINGS_API_PASSWORD; ?>" value="<?= $settings[CONCRETEWEBSOCKET_SETTINGS_API_PASSWORD]; ?>" class="form-control ccm-input-text" placeholder="<?= t("REST API Password") ?>" required />
+                    <span class="input-group-addon"><i class="fa fa-asterisk"></i></span>
+                </div>
+                <div class="help-block small"><?= t("For security, Concrete Websocket requests a password for the REST API so malicious users can't start/stop servers without be authorized. Any calls to Concrete Websocket API <b>MUST</b> have the `%s` query param or the header `%s` set.", CONCRETEWEBSOCKET_PASSWORD_PARAM, CONCRETEWEBSOCKET_PASSWORD_HEADER) ?></div>
+            </div>
+        </div>
+        <button class="btn btn-primary" type="submit"><?= t("Save settings") ?></button>
+    </form>
+</div>
+
 <style>
     .fab {
         font-family: 'Font Awesome 5 Brands', 'FontAwesome';
@@ -88,4 +122,36 @@ View::element('system_errors', [
         text-rendering: auto;
         line-height: 1;
     }
+
+    .ccm-ui #ccm-dashboard-content table td {
+        vertical-align: middle;
+    }
+
+    .ccm-ui .port-cell button {
+        padding: 8px 12.6px;
+        margin-left: 5px;
+    }
+
+    .ccm-ui .port-cell form,
+    .ccm-ui .port-cell[active] div {
+        display: none;
+    }
+
+    .ccm-ui .port-cell div,
+    .ccm-ui .port-cell[active] form {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
 </style>
+
+<script>
+    document.querySelectorAll('.port-cell button:not([type="submit"])').forEach(function(button) {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            e.target.closest('.port-cell').toggleAttribute('active');
+        });
+    });
+</script>

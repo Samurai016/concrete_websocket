@@ -19,10 +19,6 @@
         Visit <a title="WebSocket Dashboard" href="/index.php/dashboard/websocket" target="_blank">WebSocket Dashboard</a> to see it.
     </div>
     <form class="shadow p-3 mb-5 mt-3 bg-body rounded before-connect" id="connect">
-        <div class="mb-3" style="display: none;">
-            <label for="port" class="form-label">Server port</label>
-            <input type="number" min="29170" max="29998" class="form-control" id="port" placeholder="Server port">
-        </div>
         <div class="mb-3">
             <div class="form-group row mb-1">
                 <label for="url" class="form-label col-4 d-flex align-items-center justify-content-center m-0">Server url</label>
@@ -97,6 +93,13 @@
         const connectSubmit = document.getElementById('connect-submit');
         const port = document.getElementById('port');
         const url = document.getElementById('url');
+        const queryParams = new URLSearchParams(window.location.search);
+        if (queryParams.has('port')) {
+            port.value = queryParams.get('port');
+        }
+        if (queryParams.has('url')) {
+            url.value = queryParams.get('url');
+        }
 
         const send = document.getElementById('send');
         const sendSubmit = document.getElementById('send-submit');

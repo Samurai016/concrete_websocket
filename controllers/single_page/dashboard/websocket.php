@@ -4,24 +4,65 @@ namespace Concrete\Package\ConcreteWebsocket\Controller\SinglePage\Dashboard;
 
 use Concrete\Core\Page\Controller\DashboardPageController;
 use Concrete\Core\Routing\Redirect;
-use Concrete\Core\File\StorageLocation\StorageLocationFactory;
-use Concrete\Core\File\StorageLocation\Configuration\LocalConfiguration;
-use Concrete\Core\Support\Facade\Application;
 use ConcreteWebsocket\Websocket\Process;
-use ConcreteWebsocket\Websocket\Constants;
 use ConcreteWebsocket\Websocket\Manager\ProcessManager;
+use ConcreteWebsocket\Websocket\Manager\SettingsManager;
 
 class Websocket extends DashboardPageController {
     public function view() {
-        $processes = $this->scan();
+        $canExec = function_exists('exec');
+        $processes = Process::scan();
+        $settings = SettingsManager::getAll();
 
-        $this->set('execAvailable', function_exists('exec'));
+        $errors = [];
+        if ($this->get('websocketError')) {
+            $errors[] = $this->get('websocketError');
+        }
+        if (!$canExec) {
+            $errorMessage = t("exec is disabled, this prevents websocket servers from starting.\nContact your server administrator and ask them to change this setting.\nConcrete Websocket is safe and open-source, we use exec only and exclusively to start, shut down and control websocket servers.\nEdit your php.ini file (placed at %s) to enable it, see the FAQs on GitHub to see how to do it.");
+            $iniPaths = [function_exists('php_ini_loaded_file') ? php_ini_loaded_file() : ''];
+            if ($extraIni = php_ini_scanned_files()) {
+                $iniPaths .= ", " . $extraIni;
+            }
+            $errors[] = sprintf($errorMessage, count($iniPaths) > 0 ? implode(',', $iniPaths) : t('unknown path'));
+        }
+
+        $this->set('canExec', $canExec);
+        $this->set('errors', $errors);
         $this->set('processes', $processes);
+        $this->set('settings', $settings);
         $this->requireAsset('css', 'concrete_websocket_css');
     }
 
+    public function edit($id) {
+        $processManager = ProcessManager::getInstance();
+        $processArray = $processManager->getById($id);
+
+        try {
+            if (!$processArray) {
+                throw new \Exception(t("Process not found."));
+            }
+            if (!$this->token->validate('concrete_websocket_process_form_'.$id)) {
+                throw new \Exception(t("Invalid token. Please refresh the page and try again."));
+            }
+            $port = $_POST['port'];
+            if (!is_numeric($port) || $port < 1024 || $port > 65535) {
+                throw new \Exception(sprintf(t("The port must be a number between %s and %s."), 1024, 65535));
+            }
+
+            $processManager->update($id, [
+                'port' => $port,
+            ]);
+
+            return Redirect::to('/dashboard/websocket');
+        } catch (\Throwable $th) {
+            $this->set('websocketError', $th->getMessage());
+            $this->view();
+        }
+    }
+
     public function start($id) {
-        $processArray = ProcessManager::getById($id);
+        $processArray = ProcessManager::getInstance()->getById($id);
 
         try {
             if (!$processArray) {
@@ -36,13 +77,13 @@ class Websocket extends DashboardPageController {
 
             return Redirect::to('/dashboard/websocket');
         } catch (\Throwable $th) {
-            $this->set('websocketError', $th);
+            $this->set('websocketError', $th->getMessage());
             $this->view();
         }
     }
 
     public function stop($id) {
-        $processArray = ProcessManager::getById($id);
+        $processArray = ProcessManager::getInstance()->getById($id);
 
         try {
             if (!$processArray) {
@@ -57,44 +98,53 @@ class Websocket extends DashboardPageController {
 
             return Redirect::to('/dashboard/websocket');
         } catch (\Throwable $th) {
-            $this->set('websocketError', $th);
+            $this->set('websocketError', $th->getMessage());
             $this->view();
         }
     }
 
-    private function scan() {
-        // Scan files
-        $app = Application::getFacadeApplication();
-        $factory = $app->make(StorageLocationFactory::class);
-        $folder = $factory->fetchByName(Constants::$STORAGE_NAME);
-        if (!$folder) {
-            $configuration = new LocalConfiguration();
-            $configuration->setRootPath(Constants::$PATH_SCAN);
-            $folder = $factory->create($configuration, Constants::$STORAGE_NAME);
-        }
-        $filesystem = $folder->getFileSystemObject();
+    public function restart($id) {
+        $processArray = ProcessManager::getInstance()->getById($id);
 
-        $files = $filesystem->listContents('.', false);
-        $processes = array();
-        $processesIds = array();
-        foreach ($files as $file) {
-            if ($file['type'] == 'file' && $file['extension'] == 'php') {
-                $filePath = realpath(join(DIRECTORY_SEPARATOR, [Constants::$PATH_SCAN, $file['path']]));
-                $process = Process::create($filePath);
-                $processes[] = $process;
-                $processesIds[] = $process->getClass();
+        try {
+            if (!$processArray) {
+                throw new \Exception(t("Process not found."));
             }
-        }
 
-        // Check for deleted files
-        $oldProcessesIds = ProcessManager::getAllColumn('class');
-        if (count($oldProcessesIds) > count($processesIds)) {
-            $toRemove = array_diff($oldProcessesIds, $processesIds);
-            foreach ($toRemove as $class) {
-                ProcessManager::deleteByClass($class);
+            $process = Process::create($processArray['class']);
+            $process->stop();
+            $process->start();
+
+            return Redirect::to('/dashboard/websocket');
+        } catch (\Throwable $th) {
+            $this->set('websocketError', $th->getMessage());
+            $this->view();
+        }
+    }
+
+    public function settings() {
+        $args = $this->request->request->all();
+
+        if ($args && $this->token->validate('concrete_websocket_settings_form')) {
+            $errors = $this->validateSettings($args);
+            $this->error = $errors;
+
+            if (!$errors->has()) {
+                SettingsManager::set(CONCRETEWEBSOCKET_SETTINGS_API_PASSWORD, $args[CONCRETEWEBSOCKET_SETTINGS_API_PASSWORD]);
             }
+
+            $this->flash('success', t('Settings saved'));
+            $this->redirect('/dashboard/websocket');
+        }
+    }
+
+    public function validateSettings($args) {
+        $e = $this->app->make('helper/validation/error');
+
+        if ($args[CONCRETEWEBSOCKET_SETTINGS_API_PASSWORD] == '') {
+            $e->add(t('You must specify a REST API password.'));
         }
 
-        return $processes;
+        return $e;
     }
 }

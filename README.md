@@ -3,71 +3,67 @@
 A plugin to add support for WebSocket to [Concrete CMS](https://www.concretecms.com/) (known also as concrete5)
 
 ## Installation
-The package can be downloaded, unzipped into the /packages directory (ensuring the folder name is simply 'concrete_websocket') and installed via the 'Extend Concrete' option within the dashboard.   
-It is recommended that a 'release' be used instead of the master branch - [https://github.com/Samurai016/concrete_websocket/releases](https://github.com/Samurai016/concrete_websocket/releases))
+* Download the [latest release](https://github.com/Samurai016/concrete_websocket/releases/latest) package (*concrete_websocket.zip*)
+* Unzip the package in your /packages directory
+* Visit your website's "Extend Concrete" page 
+* Install the package.
 
 ## Usage
 The package provide an interface to run a custom WebSocket server.  
 The package is based on [Ratchet PHP](http://socketo.me/), so you can refer to Ratchet documentation for more details.
 > **Warning!** The websocket server are run outside Concrete environment, so, in the server class, you can't use classes or methods from the Concrete environment.
 
-To create a new server:  
-1. Create a file under application/websocket folder, for example `ExampleSocketServer.php`.  
-This file will handle the Websocket requests.
-2. Copy and paste the [example code](https://github.com/Samurai016/concrete_websocket/blob/master/example/websocket/ExampleSocketServer.php).
-3. Go to your website and navigate to `yourdomain/index.php/dashboard/websocket` or use the dashboard left panel to navigate to the Websocket Dashboard.
-4. The package will automatically detect your server class. 
-Start the server clicking on the *Start* button.  
-Now you can connect to your server through ws://yourdomain:port/
-5. Stop the server by clicking the *Stop* button.  
+Refer to [example README](https://github.com/Samurai016/concrete_websocket/blob/master/example/README.md) to create a custom WebSocket server.
 
-## Example explaining
-In the [example code](https://github.com/Samurai016/concrete_websocket/blob/master/example/ExampleSocketServer.php) you can find an implementation of an echo server (a server the reply with the same message you send).
+### Dashboard explaining
+The package will automatically detect your server classes.  
+* **Start** the server clicking on the *Start* button.  
+Now you can connect to your server through *ws://yourdomain:port/*
+* **Stop** the server by clicking the *Stop* button.  
+* **Restart** the server by clicking the *Restart* button.  
 
-### Middlewares
-When a new connection arrive to the server, it will run the middlwares defined by the `getMiddlewares()` function, they are run from top to bottom (first defined, first run).
+The **PID** column of the table is meant to be used for debugging and/or to track the process on your server.
+
+## WebSocketServer class
+
+## Middlewares
+When a new connection arrive to the server, it will run the middlwares defined by the `getMiddlewares()` function, they are run from top to bottom (LIFO queue).
 Every middleware is defined by a [`Middleware`](https://github.com/Samurai016/concrete_websocket/blob/master/websocket/src/middleware/Middleware.php) object, which is composed by:
 * `$class`: a class that must implements `Ratchet\Http\HttpServerInterface` interface.
 * `$params`: an array of params that will be passed to the `$class` constructor when the middlware is build (when the server is started from the dashboard).
+
+### `ConcreteAuthentication` Middleware
+The `ConcreteAuthentication` middleware is a built-in middleware in the package.  
+It prevent not-logged users to access the server.
+It works by checking the log status querying a special endpoint defined by the package and by closing the http connection even before the protocol switching.
 
 ### On Open
 After the middlewares, if the http connection is successful, the server switch to WebSocket protocol and the `onOpen` method is run.
 The base server `onOpen` method add the connection to the array of connected clients. So, if you want to attach a connection you can do it directly or by calling `parent::onOpen($conn);`.
 
 More info [here](http://socketo.me/api/class-Ratchet.WebSocket.WsServer.html#_onOpen);
+
 ### On Message
 Every time a message is sent from clients, the `onMessage` function is run.  
 
 More info [here](http://socketo.me/api/class-Ratchet.WebSocket.WsServer.html#_onMessage);
+
 ### On Error
 Every time an error occurs, the `onError` function is run.  
 
 More info [here](http://socketo.me/api/class-Ratchet.WebSocket.WsServer.html#_onError);
+
 ### On Close
 Every time a connection is closed, the `onClose` function is run.  
 The base server `onClose` method remove the connection from the array of connected clients. So, if you want to detach a connection you can do it directly or by calling `parent::onClose($conn);`.
 
 More info [here](http://socketo.me/api/class-Ratchet.WebSocket.WsServer.html#_onClose);
 
-## `ConcreteCheck` Middleware
-The `ConcreteCheck` middleware is a built-in middleware in the package.  
-It prevent not-logged users to access the server.
-It works by checking the log status querying a special endpoint defined by the package and by closing the http connection even before the protocol switching.
-
 ## FAQ
 
 ## I got the `exec` disabled error, how can I enable it?
 Enabling `exec` is crucial for concrete_websocket and enabling it is different between webservers.
-In general, you have to edit your `php.ini` file. Where this file is placed should be showed you by concrete_websocket in the Websocket Dashboard page when it detects that `exec` is disabled.   
-If you don't know where `php.ini` is placed, create a php file and place this code inside:
-```php
-<?php phpinfo(); ?>
-```
-Then run this code and you should see a table with a lot of infos, included the `php.ini` location.  
-
-Once you know where `php.ini` is placed, edit it.  
-You should find a string like this: `disable_functions=...exec,...`  
-Remove `exec` from that list of comma-separated names, save and restart your webserver.
+In general, you have to edit the `disable_functions` in your `php.ini` configuration file, but refers to your webserver documentation for more informations.
 
 If you use one of the following admin panels, I give you some useful links to follow to edit the `php.ini`:
 * [CPanel](https://docs.cpanel.net/knowledge-base/security/how-to-edit-your-php-ini-file/)
@@ -76,3 +72,26 @@ If you use one of the following admin panels, I give you some useful links to fo
 You can edit php.ini for every site by editing the field `Custom php.ini settings` in the _Options_ tab of the site page.
 
 If you've made the changes but don't see them applied to your site, you may need to restart your webserver.
+
+## I am unable to connect to websocket due to insecure connection  
+When you try to connect to a `ws://` unsecure connection from a `https://` secure connection, you may run into the following error message in the console:
+```
+Mixed Content: The page at '...' was loaded over HTTPS, but attempted to connect to the insecure WebSocket endpoint 'ws://...'. This request has been blocked; this endpoint must be available over WSS.
+```
+This is because your browser prevent running unsecure connection from a secure environment.
+The easiest way to solve this is to configure a proxy server.
+
+For Apache server (source: [StackOverflow](https://stackoverflow.com/questions/16979793/php-ratchet-websocket-ssl-connect#answer-28393526)):
+* Enable `mod_proxy.so` and `mod_proxy_wstunnel.so`
+* Add this lines to your `httpd.conf` file:
+  ```
+  ProxyPass /wss/ ws://yourdomain.com:port/
+  ProxyPassReverse /wss/ ws://yourdomain.com:port/
+  ```
+* Restart your server with
+  ```bash
+  sudo systemctl restart apache2
+  ```
+* Now instead of connecting to `wss://yourdomain.com:port/`, connecto to `wss://yourdomain.com/wss` (no port and add the `/wss` path)
+
+For Nginx user maybe [this solution](https://stackoverflow.com/questions/16979793/php-ratchet-websocket-ssl-connect#answer-43012985) could work but I not tested it personally so I don't guarantee.

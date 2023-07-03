@@ -1,14 +1,14 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: concrete_websocket 1.0.6.1\n"
+"Project-Id-Version: concrete_websocket 1.1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-02-10T22:24:04+01:00\n"
-"PO-Revision-Date: 2022-02-10T22:24:04+01:00\n"
+"POT-Creation-Date: 2023-07-03T22:24:04+01:00\n"
+"PO-Revision-Date: 2023-07-03T22:24:04+01:00\n"
 "Language: it_IT\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
@@ -37,13 +37,25 @@ msgstr "Non loggato"
 msgid "Process not found."
 msgstr "Processo non trovato."
 
+#: packages/concrete_websocket/controllers/single_page/dashboard/websocket.php:46
+msgid "Invalid token. Please refresh the page and try again."
+msgstr "Token di sicurezza non valido. Perfavore, ricarica la pagina e riprova."
+
 #: packages/concrete_websocket/controllers/single_page/dashboard/websocket.php:31
 msgid "Unable to start process, it is already started."
-msgstr "Impossibile avviare, il processo ?? gi?? in esecuzione."
+msgstr "Impossibile avviare, il processo è già in esecuzione."
+
+#: packages/concrete_websocket/controllers/single_page/dashboard/websocket.php:32
+msgid "The port must be a number between %s and %s."
+msgstr "La porta deve essere un numero tra %s e %s."
 
 #: packages/concrete_websocket/controllers/single_page/dashboard/websocket.php:52
 msgid "Unable to stop process, it is already stopped."
-msgstr "Impossibile fermare il processo, ?? gi?? stato fermato."
+msgstr "Impossibile fermare il processo, è già stato fermato."
+
+#: packages/concrete_websocket/controllers/single_page/dashboard/websocket.php:52
+msgid "Settings saved"
+msgstr "Impostazioni salvate"
 
 #: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:9
 msgid ""
@@ -78,6 +90,10 @@ msgid "Status"
 msgstr "Stato"
 
 #: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:38
+msgid "Port"
+msgstr "Porta"
+
+#: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:39
 msgid "PID"
 msgstr "PID"
 
@@ -86,8 +102,8 @@ msgid "Turned off"
 msgstr "Spento"
 
 #: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:51
-msgid "Running at port %s"
-msgstr "Avviato alla porta %s"
+msgid "Running"
+msgstr "In esecuzione"
 
 #: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:57
 msgid "Start process"
@@ -106,8 +122,37 @@ msgid "Stop"
 msgstr "Ferma"
 
 #: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:66
+msgid "Restart process"
+msgstr "Riavvia processo"
+
+#: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:66
+msgid "Restart"
+msgstr "Riavvia"
+
+#: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:66
 msgid "No process available"
 msgstr "Nessun processo disponibile"
+
+#: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:93
+msgid "Settings"
+msgstr "Impostazioni"
+
+#: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:98
+#: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:101
+msgid "REST API Password"
+msgstr "Password REST API"
+
+#: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:104
+msgid ""
+"For security, Concrete Websocket requests a password for the REST API so malicious users can't start/stop servers without be authorized. "
+"Any calls to Concrete Websocket API <b>MUST</b> have the `%s` query param or the header `%s` set."
+msgstr ""
+"Per motivi di sicurezza, Concrete Websocket richiede una password per l'API REST in modo che gli utenti malintenzionati non possano avviare/arrestare i server senza essere autorizzati. "
+"Qualsiasi chiamata all'API di Concrete Websocket <b>DEVE AVERE</b> il query param `%s` o l'header `%s` impostato."
+
+#: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:107
+msgid "Save settings"
+msgstr ""
 
 #: packages/concrete_websocket/websocket/src/Process.php:30
 msgid "Class %s does not exists."
@@ -116,3 +161,7 @@ msgstr "La classe %s non esiste."
 #: packages/concrete_websocket/websocket/src/Process.php:73
 msgid "Error while starting process, pid not readable"
 msgstr "Errore durante l'avvio del processo, pid non disponibile."
+
+#: packages/concrete_websocket/bootstrapper/src/routes/middleware/PasswordMiddleware.php:17
+msgid "You are not authorized to access this resource."
+msgstr "Non sei autorizzato ad accedere a questa risorsa."

@@ -1,14 +1,14 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: concrete_websocket 1.0.6.1\n"
+"Project-Id-Version: concrete_websocket 1.1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-02-10T22:24:04+01:00\n"
-"PO-Revision-Date: 2022-02-10T22:24:04+01:00\n"
+"POT-Creation-Date: 2023-07-03T22:24:04+01:00\n"
+"PO-Revision-Date: 2023-07-03T22:24:04+01:00\n"
 "Language: en_US\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
@@ -37,12 +37,24 @@ msgstr ""
 msgid "Process not found."
 msgstr ""
 
+#: packages/concrete_websocket/controllers/single_page/dashboard/websocket.php:46
+msgid "Invalid token. Please refresh the page and try again."
+msgstr ""
+
 #: packages/concrete_websocket/controllers/single_page/dashboard/websocket.php:31
 msgid "Unable to start process, it is already started."
 msgstr ""
 
+#: packages/concrete_websocket/controllers/single_page/dashboard/websocket.php:32
+msgid "The port must be a number between %s and %s."
+msgstr ""
+
 #: packages/concrete_websocket/controllers/single_page/dashboard/websocket.php:52
 msgid "Unable to stop process, it is already stopped."
+msgstr ""
+
+#: packages/concrete_websocket/controllers/single_page/dashboard/websocket.php:52
+msgid "Settings saved"
 msgstr ""
 
 #: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:9
@@ -74,6 +86,10 @@ msgid "Status"
 msgstr ""
 
 #: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:38
+msgid "Port"
+msgstr ""
+
+#: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:39
 msgid "PID"
 msgstr ""
 
@@ -82,7 +98,7 @@ msgid "Turned off"
 msgstr ""
 
 #: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:51
-msgid "Running at port %s"
+msgid "Running"
 msgstr ""
 
 #: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:57
@@ -102,7 +118,34 @@ msgid "Stop"
 msgstr ""
 
 #: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:66
+msgid "Restart process"
+msgstr ""
+
+#: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:66
+msgid "Restart"
+msgstr ""
+
+#: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:66
 msgid "No process available"
+msgstr ""
+
+#: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:93
+msgid "Settings"
+msgstr ""
+
+#: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:98
+#: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:101
+msgid "REST API Password"
+msgstr ""
+
+#: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:104
+msgid ""
+"For security, Concrete Websocket requests a password for the REST API so malicious users can't start/stop servers without be authorized. "
+"Any calls to Concrete Websocket API <b>MUST</b> have the `%s` query param or the header `%s` set."
+msgstr ""
+
+#: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:107
+msgid "Save settings"
 msgstr ""
 
 #: packages/concrete_websocket/websocket/src/Process.php:30
@@ -111,4 +154,8 @@ msgstr ""
 
 #: packages/concrete_websocket/websocket/src/Process.php:73
 msgid "Error while starting process, pid not readable"
+msgstr ""
+
+#: packages/concrete_websocket/bootstrapper/src/routes/middleware/PasswordMiddleware.php:17
+msgid "You are not authorized to access this resource."
 msgstr ""
