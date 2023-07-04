@@ -5,9 +5,9 @@ namespace ConcreteWebsocket\Websocket\Middleware;
 /**
  * Class Middleware
  * 
- * This abstract class represents a middleware for WebSocket servers.
+ * This class represents a middleware for WebSocket servers.
  */
-abstract class Middleware {
+class Middleware {
     protected $class;
     protected $params;
 

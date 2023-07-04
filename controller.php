@@ -15,7 +15,7 @@ class Controller extends Package
 {
     protected $pkgHandle = 'concrete_websocket';
     protected $appVersionRequired = '8.0';
-    protected $pkgVersion = '1.1.1';
+    protected $pkgVersion = '1.1.2';
 
     protected $pkgAutoloaderRegistries = [
         'bootstrapper/src' => '\ConcreteWebsocket\Websocket',
