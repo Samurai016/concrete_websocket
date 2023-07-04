@@ -1,0 +1,349 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Concrete Websocket REST API",
+    "description": "Take control of your WebSocket servers effortlessly with the Concrete Websocket REST API. Here's what you can do:   \n* ✨ **Start/Stop/Restart servers**  \n* 📊 **Check server status**\n\nLevel up your WebSocket infrastructure and unlock new possibilities. Let the Concrete Websocket REST API empower your development journey!",
+    "contact": {
+      "name": "Nicolò Rebaioli",
+      "email": "niko.reba@gmail.com",
+      "url": "https://rebaioli.altervista.org"
+    },
+    "license": {
+      "name": "📜 MIT license",
+      "url": "https://github.com/Samurai016/concrete_websocket/blob/master/LICENSE"
+    },
+    "version": "1.1.2"
+  },
+  "externalDocs": {
+    "description": "🔍 Find out more about concrete_websocket.",
+    "url": "https://github.com/Samurai016/concrete_websocket"
+  },
+  "tags": [
+    {
+      "name": "Servers",
+      "description": "🛠️ Endpoint to manage your servers."
+    }
+  ],
+  "paths": {
+    "/concrete_websocket/api": {
+      "get": {
+        "tags": [
+          "Servers"
+        ],
+        "summary": "📋 Retrieve all servers.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/pwd"
+          },
+          {
+            "$ref": "#/components/parameters/X-Websocket-Password"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "✅ Request success.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Server"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/concrete_websocket/api/{id}": {
+      "get": {
+        "tags": [
+          "Servers"
+        ],
+        "summary": "🔍 Retrieve the server the specified ID (status included)",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/id"
+          },
+          {
+            "$ref": "#/components/parameters/pwd"
+          },
+          {
+            "$ref": "#/components/parameters/X-Websocket-Password"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "✅ Request success.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Server"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/concrete_websocket/api/start/{id}": {
+      "get": {
+        "tags": [
+          "Servers"
+        ],
+        "summary": "🚀 Start the server with the specified ID.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/id"
+          },
+          {
+            "$ref": "#/components/parameters/pwd"
+          },
+          {
+            "$ref": "#/components/parameters/X-Websocket-Password"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "✅ Server successfully started.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Server"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/concrete_websocket/api/stop/{id}": {
+      "get": {
+        "tags": [
+          "Servers"
+        ],
+        "summary": "⛔ Stop the server with the specified id.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/id"
+          },
+          {
+            "$ref": "#/components/parameters/pwd"
+          },
+          {
+            "$ref": "#/components/parameters/X-Websocket-Password"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "✅ Server successfully stopped.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Server"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/concrete_websocket/api/restart/{id}": {
+      "get": {
+        "tags": [
+          "Servers"
+        ],
+        "summary": "🔄 Restart the server with the specified id.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/id"
+          },
+          {
+            "$ref": "#/components/parameters/pwd"
+          },
+          {
+            "$ref": "#/components/parameters/X-Websocket-Password"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "✅ Server successfully restarted.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Server"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "401": {
+        "description": "🚫 Access denied due to insufficient permissions.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "403": {
+        "description": "🚫 Access denied due to missing authentication parameter.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "500": {
+        "description": "⚠️ An internal server error occurred.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      }
+    },
+    "parameters": {
+      "pwd": {
+        "name": "pwd",
+        "in": "query",
+        "required": false,
+        "description": "🔒 Password for authentication (mandatory if `X-Websocket-Password` is not set).",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "X-Websocket-Password": {
+        "name": "X-Websocket-Password",
+        "in": "header",
+        "required": false,
+        "description": "🔒 Password for authentication (mandatory if `pwd` is not set).",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "id": {
+        "name": "id",
+        "in": "path",
+        "description": "🆔 The ID of the server.",
+        "required": true,
+        "schema": {
+          "type": "integer"
+        }
+      }
+    },
+    "schemas": {
+      "Server": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1,
+            "description": "🆔 The ID of the server."
+          },
+          "port": {
+            "type": "integer",
+            "example": 8080,
+            "minimum": 1024,
+            "maximum": 65535,
+            "description": "🔌 The port number on which the server will listen."
+          },
+          "pid": {
+            "type": "integer",
+            "example": 23849,
+            "description": "🔄 The PID (process ID) of the running process."
+          },
+          "class": {
+            "type": "string",
+            "example": "/to/application/websocket/ExampleWebsocketServer.php",
+            "description": "🌐 The path of the server class."
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "off",
+              "on"
+            ],
+            "description": "📊 The status of the process."
+          }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "boolean",
+            "example": true,
+            "description": "❌ Indicates if an error occurred or not."
+          },
+          "errors": {
+            "description": "📜 An array of error messages.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "You are not authorized to access this resource."
+            ]
+          }
+        }
+      }
+    }
+  }
+}

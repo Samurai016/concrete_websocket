@@ -64,6 +64,11 @@ The base server `onClose` method remove the connection from the array of connect
 
 More info [here](http://socketo.me/api/class-Ratchet.WebSocket.WsServer.html#_onClose);
 
+## 🌐 REST API Documentation
+
+Concrete Websocket come up with a built-in REST API that allows you to control and monitor your servers remotely.
+Refer to the [wiki](https://github.com/Samurai016/concrete_websocket/wiki/📚-REST-API-Documentation) for the documentation. ✨🔍
+
 ## 🤔 FAQ
 
 ## ❓ I got the `exec` disabled error, how can I enable it?

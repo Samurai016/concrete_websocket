@@ -15,7 +15,6 @@ class Process implements JsonSerializable {
     protected $pid;
     protected $class;
     protected $status = 'off';
-    protected $errors;
 
     function __construct($values = null) {
         if ($values) {
@@ -24,7 +23,6 @@ class Process implements JsonSerializable {
             $this->pid = $values['pid'];
             $this->class = $values['class'];
             $this->status = $values['status'];
-            $this->errors = $values['errors'];
         }
         $this->checkRunning();
     }
@@ -169,14 +167,6 @@ class Process implements JsonSerializable {
 
     public function getStatus() {
         return $this->status;
-    }
-
-    public function setErrors($errors) {
-        $this->errors = $errors;
-    }
-
-    public function getErrors() {
-        return $this->errors;
     }
 
     // Utils
