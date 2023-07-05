@@ -1,6 +1,6 @@
 <?php
 
-namespace ConcreteWebsocket\Websocket;
+namespace ConcreteWebSocket\WebSocket;
 
 use Ratchet\MessageComponentInterface;
 use Ratchet\ConnectionInterface;
@@ -9,7 +9,7 @@ use Ratchet\ConnectionInterface;
  * Class WebSocketServer  
  *   
  * This abstract class represents a WebSocket base server.  
- * Extends this class when you want to create a WebSocket server for Concrete Websocket.  
+ * Extends this class when you want to create a WebSocket server for Concrete WebSocket.  
  */
 abstract class WebSocketServer implements MessageComponentInterface {
     protected $clients;
@@ -25,9 +25,9 @@ abstract class WebSocketServer implements MessageComponentInterface {
      * Get the middlewares for the WebSocket server.
      * The middlewares are executed in the order they are defined (LIFO queue).  
      * If a middleware returns `false`, the next middlewares will not be executed.  
-     * Every middleware **must extends** the `ConcreteWebsocket\Websocket\Middleware\Middleware` class.  
+     * Every middleware **must extends** the `ConcreteWebSocket\WebSocket\Middleware\Middleware` class.  
      *   
-     * @return ConcreteWebsocket\Websocket\Middleware\Middleware[] An array of middlewares.
+     * @return ConcreteWebSocket\WebSocket\Middleware\Middleware[] An array of middlewares.
      */
     public static function getMiddlewares() {
         return [];

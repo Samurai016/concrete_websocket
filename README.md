@@ -1,4 +1,4 @@
-# 🌐🧱 Concrete Websocket 🚀
+# 🌐🧱 Concrete WebSocket 🚀
 ![Last release](https://img.shields.io/github/v/release/Samurai016/concrete_websocket?style=flat-square)
 ![License](https://img.shields.io/github/license/Samurai016/concrete_websocket?style=flat-square)
 ![Concrete CMS 8](https://img.shields.io/badge/Concrete%20CMS%208-c?style=flat-square&labelColor=%23017ddd&color=017ddd&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNSAyOSI+PGcgZGF0YS1uYW1lPSJMaXZlbGxvIDIiPjxwYXRoIGQ9Ik0xNyAyOGExMSAxMSAwIDAgMS0zIDEgMTIgMTIgMCAwIDEtOS0zYy0zLTItMy01LTEtOCAyLTIgNS0zIDgtMyAyIDAgOCAwIDYgMy0xIDMtNSAwLTggMS0yIDEtMyA0IDAgNmE2IDYgMCAwIDAgNi0xYzItMSA2LTggOS01IDEgMS02IDgtOCA5TTAgMTBsMS0zIDIgMyAxIDctNC03bTYtN2MxLTIgMiAwIDIgMnMzIDkgMSA5LTMtNy0zLThWM204LTMgMSA0YzAgMSAwIDEwLTEgOUwxMiAzYzAtMiAwLTMgMi0zbTQgNiAxLTNjMi0xIDIgMiAyIDNzLTEgOS0zIDljLTItMSAwLTggMC05IiBkYXRhLW5hbWU9IkxpdmVsbG8gMSIgc3R5bGU9ImZpbGw6I2ZmZjtmaWxsLXJ1bGU6ZXZlbm9kZCIvPjwvZz48L3N2Zz4=)
@@ -15,7 +15,7 @@
 ## 📚 Usage
 Run a custom WebSocket server effortlessly with our package. Based on [Ratchet PHP](http://socketo.me/), it opens up a world of real-time possibilities for your Concrete CMS site. 🚀  
 > ⚠️ **Warning!**  
-> The websocket servers are run outside Concrete environment, so, in the server class, you can't use classes or methods from the Concrete environment.
+> The WebSocket servers are run outside Concrete environment, so, in the server class, you can't use classes or methods from the Concrete environment.
 
 Follow our [example README](https://github.com/Samurai016/concrete_websocket/blob/master/example/README.md) to create a custom WebSocket server.
 
@@ -66,7 +66,7 @@ More info [here](http://socketo.me/api/class-Ratchet.WebSocket.WsServer.html#_on
 
 ## 🌐 REST API Documentation
 
-Concrete Websocket come up with a built-in REST API that allows you to control and monitor your servers remotely.
+Concrete WebSocket come up with a built-in REST API that allows you to control and monitor your servers remotely.
 Refer to the [wiki](https://github.com/Samurai016/concrete_websocket/wiki/📚-REST-API-Documentation) for the documentation. ✨🔍
 
 ## 🤔 FAQ

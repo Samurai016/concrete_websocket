@@ -1,10 +1,10 @@
 <?php
 
-namespace Application\Websocket;
+namespace Application\WebSocket;
 
-use ConcreteWebsocket\Websocket\WebSocketServer;
-use ConcreteWebsocket\Websocket\Middleware\ConcreteAuthentication;
-use ConcreteWebsocket\Websocket\Middleware\Middleware;
+use ConcreteWebSocket\WebSocket\WebSocketServer;
+use ConcreteWebSocket\WebSocket\Middleware\ConcreteAuthentication;
+use ConcreteWebSocket\WebSocket\Middleware\Middleware;
 use Ratchet\ConnectionInterface;
 use Ratchet\Http\OriginCheck;
 

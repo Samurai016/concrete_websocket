@@ -1,6 +1,6 @@
 <?php
 
-namespace ConcreteWebsocket\Websocket\Middleware;
+namespace ConcreteWebSocket\WebSocket\Middleware;
 
 /**
  * Class Middleware

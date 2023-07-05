@@ -1,60 +1,62 @@
 <?php
 
-namespace Concrete\Package\ConcreteWebsocket;
+namespace Concrete\Package\ConcreteWebSocket;
 
-use Concrete\Core\Backup\ContentImporter;
 use Concrete\Core\Package\Package;
 use Concrete\Core\Asset\AssetList;
 use Concrete\Core\Support\Facade\Url;
-use Concrete\Core\Support\Facade\Application;
-use ConcreteWebsocket\Websocket\Constants;
-use ConcreteWebsocket\Websocket\Manager\SettingsManager;
-use ConcreteWebsocket\Websocket\Routes\RouteList;
+use Concrete\Core\Page\Single as SinglePage;
+use ConcreteWebSocket\WebSocket\Constants;
+use ConcreteWebSocket\WebSocket\Manager\SettingsManager;
+use ConcreteWebSocket\WebSocket\Routes\RouteList;
 
-class Controller extends Package
-{
+class Controller extends Package {
     protected $pkgHandle = 'concrete_websocket';
     protected $appVersionRequired = '8.0';
-    protected $pkgVersion = '1.1.2';
+    protected $pkgVersion = '1.1.3';
 
     protected $pkgAutoloaderRegistries = [
-        'bootstrapper/src' => '\ConcreteWebsocket\Websocket',
-        'bootstrapper/src/middleware' => '\ConcreteWebsocket\Websocket\Middleware',
-        'bootstrapper/src/manager' => '\ConcreteWebsocket\Websocket\Manager',
-        'bootstrapper/src/routes' => '\ConcreteWebsocket\Websocket\Routes',
-        'bootstrapper/src/routes/middleware' => '\ConcreteWebsocket\Websocket\Routes\Middleware',
-        'bootstrapper/src/utils' => '\ConcreteWebsocket\Websocket\Utils',
+        'bootstrapper/src' => '\ConcreteWebSocket\WebSocket',
+        'bootstrapper/src/middleware' => '\ConcreteWebSocket\WebSocket\Middleware',
+        'bootstrapper/src/manager' => '\ConcreteWebSocket\WebSocket\Manager',
+        'bootstrapper/src/routes' => '\ConcreteWebSocket\WebSocket\Routes',
+        'bootstrapper/src/routes/middleware' => '\ConcreteWebSocket\WebSocket\Routes\Middleware',
+        'bootstrapper/src/utils' => '\ConcreteWebSocket\WebSocket\Utils',
     ];
 
-    public function getPackageName()
-    {
-        return t('Concrete Websocket');
+    public function getPackageName() {
+        return t('Concrete WebSocket');
     }
 
-    public function getPackageDescription()
-    {
-        return t('Add websocket support.');
+    public function getPackageDescription() {
+        return t('Add WebSocket support.');
     }
 
-    public function install()
-    {
+    public function install() {
         // Check PHP version
         if (version_compare(phpversion(), '7.0.0', '>') < 0) {
             throw new \Exception(t('This package requires at least version 7 of PHP'), 1);
         }
 
         $pkg = parent::install();
-        $ci = new ContentImporter();
-        $ci->importContentFile($pkg->getPackagePath() . '/config/dashboard.xml');
+
+        // Install single pages
+        $page = SinglePage::add('/dashboard/websocket', $pkg);
+        $page->updateCollectionName(t('WebSocket Dashboard'));
 
         // Default settings
+        Constants::registerConstants();
         SettingsManager::set(CONCRETEWEBSOCKET_SETTINGS_API_PASSWORD, substr(str_shuffle(md5(microtime())), 0, 10));
+        SettingsManager::set(CONCRETEWEBSOCKET_SETTINGS_PHP_PATH, Console::getPhpExecutable());
 
         // Bugfix: Seems that sometimes concrete5 do a rollback on the database after package installation, this fix it
-        $app = Application::getFacadeApplication();
-        $db = $app->make('database')->connection();
-        if ($db->isTransactionActive()) {
-            $db->commit();
+        try {
+            $db = $this->app->make('database')->connection();
+            if ($db->isTransactionActive()) {
+                $db->commit();
+            }
+        } catch (\PDOException $th) {
+            // Ignore PDOException
         }
     }
 

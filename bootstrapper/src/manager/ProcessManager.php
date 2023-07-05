@@ -1,6 +1,6 @@
 <?php
 
-namespace ConcreteWebsocket\Websocket\Manager;
+namespace ConcreteWebSocket\WebSocket\Manager;
 
 use Concrete\Core\Support\Facade\Application;
 
@@ -11,7 +11,7 @@ class ProcessManager {
     protected $db;
 
     /**
-     * @var \ConcreteWebsocket\Websocket\Manager\ProcessManager $instance
+     * @var \ConcreteWebSocket\WebSocket\Manager\ProcessManager $instance
      */
     protected static $instance = null;
 

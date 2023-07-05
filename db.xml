@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schema xmlns="http://www.concrete5.org/doctrine-xml/0.5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.concrete5.org/doctrine-xml/0.5 http://concrete5.github.io/doctrine-xml/doctrine-xml-0.5.xsd">
 
-  <table name="ConcreteWebsocketProcesses">
+  <table name="ConcreteWebSocketProcesses">
     <field name="id" type="integer" size="10">
       <unsigned />
       <autoincrement />
@@ -10,6 +10,7 @@
     <field name="class" type="string" size="400"></field>
     <field name="pid" type="string" size="20"></field>
     <field name="port" type="integer" size="5">
+      <notnull />
       <unsigned />
     </field>
     <field name="status" type="string" size="20">
@@ -18,7 +19,7 @@
     </field>
   </table>
 
-  <table name="ConcreteWebsocketSettings">
+  <table name="ConcreteWebSocketSettings">
     <field name="field" type="string" size="200">
       <key />
     </field>

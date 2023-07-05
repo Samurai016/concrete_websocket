@@ -1,6 +1,6 @@
 <?php
 
-namespace ConcreteWebsocket\Websocket;
+namespace ConcreteWebSocket\WebSocket;
 
 use mysqli;
 
@@ -20,7 +20,7 @@ try {
     $classes = get_declared_classes();
     $className = pathinfo($class)['filename'];
     for ($i = count($classes) - 1; $i >= 0; $i--) {
-        if (preg_match('/Application\\\\Websocket(\\\\.+|)\\\\' . $className . '$/m', $classes[$i])) {
+        if (preg_match('/Application\\\\WebSocket(\\\\.+|)\\\\' . $className . '$/m', $classes[$i])) {
             $classPath = $classes[$i];
             break;
         }

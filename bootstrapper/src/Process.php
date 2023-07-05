@@ -1,8 +1,8 @@
 <?php
 
-namespace ConcreteWebsocket\Websocket;
+namespace ConcreteWebSocket\WebSocket;
 
-use ConcreteWebsocket\Websocket\Manager\ProcessManager;
+use ConcreteWebSocket\WebSocket\Manager\ProcessManager;
 use Concrete\Core\File\StorageLocation\StorageLocationFactory;
 use Concrete\Core\File\StorageLocation\Configuration\LocalConfiguration;
 use Concrete\Core\Support\Facade\Application;
@@ -42,6 +42,7 @@ class Process implements JsonSerializable {
 
             $process->id = $processManager->add([
                 'class' => $class,
+                'port' => static::generateRandomPort(),
             ]);
             $process->class = $class;
         }
@@ -158,7 +159,7 @@ class Process implements JsonSerializable {
     }
 
     public function getClassName() {
-        return '\\Application\\Websocket\\' . basename($this->class, '.php');
+        return '\\Application\\WebSocket\\' . basename($this->class, '.php');
     }
 
     public function getName() {
@@ -186,7 +187,6 @@ class Process implements JsonSerializable {
             'pid' => $this->pid,
             'class' => $this->class,
             'status' => $this->status,
-            'errors' => $this->errors,
         ];
     }
 }

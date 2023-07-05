@@ -1,6 +1,6 @@
 <?php
 
-namespace ConcreteWebsocket\Websocket\Manager;
+namespace ConcreteWebSocket\WebSocket\Manager;
 
 use Concrete\Core\Support\Facade\Application;
 

@@ -1,8 +1,8 @@
 {
   "openapi": "3.0.3",
   "info": {
-    "title": "Concrete Websocket REST API",
-    "description": "Take control of your WebSocket servers effortlessly with the Concrete Websocket REST API. Here's what you can do:   \n* ✨ **Start/Stop/Restart servers**  \n* 📊 **Check server status**\n\nLevel up your WebSocket infrastructure and unlock new possibilities. Let the Concrete Websocket REST API empower your development journey!",
+    "title": "Concrete WebSocket REST API",
+    "description": "Take control of your WebSocket servers effortlessly with the Concrete WebSocket REST API. Here's what you can do:   \n* ✨ **Start/Stop/Restart servers**  \n* 📊 **Check server status**\n\nLevel up your WebSocket infrastructure and unlock new possibilities. Let the Concrete WebSocket REST API empower your development journey!",
     "contact": {
       "name": "Nicolò Rebaioli",
       "email": "niko.reba@gmail.com",
@@ -36,7 +36,7 @@
             "$ref": "#/components/parameters/pwd"
           },
           {
-            "$ref": "#/components/parameters/X-Websocket-Password"
+            "$ref": "#/components/parameters/X-WebSocket-Password"
           }
         ],
         "responses": {
@@ -79,7 +79,7 @@
             "$ref": "#/components/parameters/pwd"
           },
           {
-            "$ref": "#/components/parameters/X-Websocket-Password"
+            "$ref": "#/components/parameters/X-WebSocket-Password"
           }
         ],
         "responses": {
@@ -119,7 +119,7 @@
             "$ref": "#/components/parameters/pwd"
           },
           {
-            "$ref": "#/components/parameters/X-Websocket-Password"
+            "$ref": "#/components/parameters/X-WebSocket-Password"
           }
         ],
         "responses": {
@@ -159,7 +159,7 @@
             "$ref": "#/components/parameters/pwd"
           },
           {
-            "$ref": "#/components/parameters/X-Websocket-Password"
+            "$ref": "#/components/parameters/X-WebSocket-Password"
           }
         ],
         "responses": {
@@ -199,7 +199,7 @@
             "$ref": "#/components/parameters/pwd"
           },
           {
-            "$ref": "#/components/parameters/X-Websocket-Password"
+            "$ref": "#/components/parameters/X-WebSocket-Password"
           }
         ],
         "responses": {
@@ -264,13 +264,13 @@
         "name": "pwd",
         "in": "query",
         "required": false,
-        "description": "🔒 Password for authentication (mandatory if `X-Websocket-Password` is not set).",
+        "description": "🔒 Password for authentication (mandatory if `X-WebSocket-Password` is not set).",
         "schema": {
           "type": "string"
         }
       },
-      "X-Websocket-Password": {
-        "name": "X-Websocket-Password",
+      "X-WebSocket-Password": {
+        "name": "X-WebSocket-Password",
         "in": "header",
         "required": false,
         "description": "🔒 Password for authentication (mandatory if `pwd` is not set).",
@@ -311,7 +311,7 @@
           },
           "class": {
             "type": "string",
-            "example": "/to/application/websocket/ExampleWebsocketServer.php",
+            "example": "/to/application/websocket/ExampleWebSocketServer.php",
             "description": "🌐 The path of the server class."
           },
           "status": {

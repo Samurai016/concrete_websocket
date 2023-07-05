@@ -1,16 +1,17 @@
 <?php
 
-namespace Concrete\Package\ConcreteWebsocket\Controller\SinglePage\Dashboard;
+namespace Concrete\Package\ConcreteWebSocket\Controller\SinglePage\Dashboard;
 
 use Concrete\Core\Page\Controller\DashboardPageController;
 use Concrete\Core\Routing\Redirect;
-use ConcreteWebsocket\Websocket\Process;
-use ConcreteWebsocket\Websocket\Manager\ProcessManager;
-use ConcreteWebsocket\Websocket\Manager\SettingsManager;
+use ConcreteWebSocket\WebSocket\Console;
+use ConcreteWebSocket\WebSocket\Process;
+use ConcreteWebSocket\WebSocket\Manager\ProcessManager;
+use ConcreteWebSocket\WebSocket\Manager\SettingsManager;
 
-class Websocket extends DashboardPageController {
+class WebSocket extends DashboardPageController {
     public function view() {
-        $canExec = function_exists('exec');
+        $canExec = Console::canExecute();
         $processes = Process::scan();
         $settings = SettingsManager::getAll();
 
@@ -19,7 +20,7 @@ class Websocket extends DashboardPageController {
             $errors[] = $this->get('websocketError');
         }
         if (!$canExec) {
-            $errorMessage = t("exec is disabled, this prevents websocket servers from starting.\nContact your server administrator and ask them to change this setting.\nConcrete Websocket is safe and open-source, we use exec only and exclusively to start, shut down and control websocket servers.\nEdit your php.ini file (placed at %s) to enable it, see the FAQs on GitHub to see how to do it.");
+            $errorMessage = t("exec, shell_exec and similar functions are disabled, this prevents WebSocket servers from starting.\nContact your server administrator and ask him to change this setting.\nConcrete WebSocket is safe and open-source, we use exec (or similar) only and exclusively to start, shut-down and control WebSocket servers.\nEdit your php.ini file (placed at %s) to enable it, see the FAQs on GitHub to see how to do it.");
             $iniPaths = [function_exists('php_ini_loaded_file') ? php_ini_loaded_file() : ''];
             if ($extraIni = php_ini_scanned_files()) {
                 $iniPaths .= ", " . $extraIni;
@@ -131,6 +132,7 @@ class Websocket extends DashboardPageController {
 
             if (!$errors->has()) {
                 SettingsManager::set(CONCRETEWEBSOCKET_SETTINGS_API_PASSWORD, $args[CONCRETEWEBSOCKET_SETTINGS_API_PASSWORD]);
+                SettingsManager::set(CONCRETEWEBSOCKET_SETTINGS_PHP_PATH, $args[CONCRETEWEBSOCKET_SETTINGS_PHP_PATH]);
             }
 
             $this->flash('success', t('Settings saved'));
@@ -143,6 +145,9 @@ class Websocket extends DashboardPageController {
 
         if ($args[CONCRETEWEBSOCKET_SETTINGS_API_PASSWORD] == '') {
             $e->add(t('You must specify a REST API password.'));
+        }
+        if ($args[CONCRETEWEBSOCKET_SETTINGS_PHP_PATH] == '') {
+            $e->add(t('You must specify a valid PHP executable path.'));
         }
 
         return $e;

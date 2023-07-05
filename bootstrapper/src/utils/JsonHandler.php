@@ -1,6 +1,6 @@
 <?php
 
-namespace ConcreteWebsocket\Websocket\Utils;
+namespace ConcreteWebSocket\WebSocket\Utils;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
 

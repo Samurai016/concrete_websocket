@@ -1,12 +1,12 @@
 openapi: 3.0.3
 info:
-  title: Concrete Websocket REST API
+  title: Concrete WebSocket REST API
   description: |-
-    Take control of your WebSocket servers effortlessly with the Concrete Websocket REST API. Here's what you can do:   
+    Take control of your WebSocket servers effortlessly with the Concrete WebSocket REST API. Here's what you can do:   
     * ✨ **Start/Stop/Restart servers**  
     * 📊 **Check server status**
 
-    Level up your WebSocket infrastructure and unlock new possibilities. Let the Concrete Websocket REST API empower your development journey!
+    Level up your WebSocket infrastructure and unlock new possibilities. Let the Concrete WebSocket REST API empower your development journey!
   contact:
     name: Nicolò Rebaioli
     email: niko.reba@gmail.com
@@ -29,7 +29,7 @@ paths:
       summary: 📋 Retrieve all servers.
       parameters:
         - $ref: '#/components/parameters/pwd'
-        - $ref: '#/components/parameters/X-Websocket-Password'
+        - $ref: '#/components/parameters/X-WebSocket-Password'
       responses:
         '200':
           description: ✅ Request success.
@@ -53,7 +53,7 @@ paths:
       parameters:
         - $ref: '#/components/parameters/id'
         - $ref: '#/components/parameters/pwd'
-        - $ref: '#/components/parameters/X-Websocket-Password'
+        - $ref: '#/components/parameters/X-WebSocket-Password'
       responses:
         '200':
           description: ✅ Request success.
@@ -75,7 +75,7 @@ paths:
       parameters:
         - $ref: '#/components/parameters/id'
         - $ref: '#/components/parameters/pwd'
-        - $ref: '#/components/parameters/X-Websocket-Password'
+        - $ref: '#/components/parameters/X-WebSocket-Password'
       responses:
         '200':
           description: ✅ Server successfully started.
@@ -97,7 +97,7 @@ paths:
       parameters:
         - $ref: '#/components/parameters/id'
         - $ref: '#/components/parameters/pwd'
-        - $ref: '#/components/parameters/X-Websocket-Password'
+        - $ref: '#/components/parameters/X-WebSocket-Password'
       responses:
         '200':
           description: ✅ Server successfully stopped.
@@ -119,7 +119,7 @@ paths:
       parameters:
         - $ref: '#/components/parameters/id'
         - $ref: '#/components/parameters/pwd'
-        - $ref: '#/components/parameters/X-Websocket-Password'
+        - $ref: '#/components/parameters/X-WebSocket-Password'
       responses:
         '200':
           description: ✅ Server successfully restarted.
@@ -158,11 +158,11 @@ components:
       name: pwd
       in: query
       required: false
-      description: 🔒 Password for authentication (mandatory if `X-Websocket-Password` is not set).
+      description: 🔒 Password for authentication (mandatory if `X-WebSocket-Password` is not set).
       schema:
         type: string
-    X-Websocket-Password:
-      name: X-Websocket-Password
+    X-WebSocket-Password:
+      name: X-WebSocket-Password
       in: header
       required: false
       description: 🔒 Password for authentication (mandatory if `pwd` is not set).
@@ -195,7 +195,7 @@ components:
           description: 🔄 The PID (process ID) of the running process.
         class:
           type: string
-          example: /to/application/websocket/ExampleWebsocketServer.php
+          example: /to/application/websocket/ExampleWebSocketServer.php
           description: 🌐 The path of the server class.
         status:
           type: string

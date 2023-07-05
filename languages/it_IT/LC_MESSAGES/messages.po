@@ -1,167 +1,203 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: concrete_websocket 1.1.0\n"
+"Project-Id-Version: concrete_websocket 1.1.3\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-07-03T22:24:04+01:00\n"
-"PO-Revision-Date: 2023-07-03T22:24:04+01:00\n"
+"POT-Creation-Date: 2023-07-06T00:48:30+02:00\n"
+"PO-Revision-Date: 2023-07-06T00:48:31+02:00\n"
 "Language: it_IT\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"Plural-Forms: nplurals=3; plural=(n == 1) ? 0 : ((n != 0 && n % 1000000 == 0) ? 1 : 2);\n"
 
 #: packages/concrete_websocket/config/dashboard.xml:8
-msgid "Websocket Dashboard"
-msgstr "Websocket Dashboard"
+#: packages/concrete_websocket/controller.php:45
+msgid "WebSocket Dashboard"
+msgstr "WebSocket Dashboard"
 
-#: packages/concrete_websocket/controller.php:29
-msgid "Concrete Websocket"
-msgstr "Concrete Websocket"
+#: packages/concrete_websocket/controller.php:28
+msgid "Concrete WebSocket"
+msgstr "Concrete WebSocket"
 
-#: packages/concrete_websocket/controller.php:34
-msgid "Add websocket support."
+#: packages/concrete_websocket/controller.php:32
+msgid "Add WebSocket support."
 msgstr "Aggiunge il supporto per le WebSocket."
 
-#: packages/concrete_websocket/controller.php:41
+#: packages/concrete_websocket/controller.php:38
 msgid "This package requires at least version 7 of PHP"
 msgstr "Questo pacchetto richiede almeno la versione 7 di PHP"
 
-#: packages/concrete_websocket/controller.php:73
-msgid "Not logged"
-msgstr "Non loggato"
+#: packages/concrete_websocket/bootstrapper/src/routes/middleware/PasswordMiddleware.php:18
+#: packages/concrete_websocket/bootstrapper/src/routes/middleware/PasswordMiddleware.php:23
+msgid "You are not authorized to access this resource."
+msgstr "Non sei autorizzato ad accedere a questa risorsa."
 
-#: packages/concrete_websocket/controllers/single_page/dashboard/websocket.php:28
-#: packages/concrete_websocket/controllers/single_page/dashboard/websocket.php:49
+#: packages/concrete_websocket/bootstrapper/src/routes/ApiRoutes.php:47
+#: packages/concrete_websocket/bootstrapper/src/routes/ApiRoutes.php:62
+#: packages/concrete_websocket/bootstrapper/src/routes/ApiRoutes.php:83
+#: packages/concrete_websocket/bootstrapper/src/routes/ApiRoutes.php:103
+#: packages/concrete_websocket/controllers/single_page/dashboard/websocket.php:44
+#: packages/concrete_websocket/controllers/single_page/dashboard/websocket.php:70
+#: packages/concrete_websocket/controllers/single_page/dashboard/websocket.php:91
+#: packages/concrete_websocket/controllers/single_page/dashboard/websocket.php:112
 msgid "Process not found."
 msgstr "Processo non trovato."
 
-#: packages/concrete_websocket/controllers/single_page/dashboard/websocket.php:46
-msgid "Invalid token. Please refresh the page and try again."
-msgstr "Token di sicurezza non valido. Perfavore, ricarica la pagina e riprova."
-
-#: packages/concrete_websocket/controllers/single_page/dashboard/websocket.php:31
+#: packages/concrete_websocket/bootstrapper/src/routes/ApiRoutes.php:66
+#: packages/concrete_websocket/controllers/single_page/dashboard/websocket.php:73
 msgid "Unable to start process, it is already started."
 msgstr "Impossibile avviare, il processo è già in esecuzione."
 
-#: packages/concrete_websocket/controllers/single_page/dashboard/websocket.php:32
-msgid "The port must be a number between %s and %s."
-msgstr "La porta deve essere un numero tra %s e %s."
-
-#: packages/concrete_websocket/controllers/single_page/dashboard/websocket.php:52
+#: packages/concrete_websocket/bootstrapper/src/routes/ApiRoutes.php:86
+#: packages/concrete_websocket/controllers/single_page/dashboard/websocket.php:94
 msgid "Unable to stop process, it is already stopped."
 msgstr "Impossibile fermare il processo, è già stato fermato."
 
-#: packages/concrete_websocket/controllers/single_page/dashboard/websocket.php:52
-msgid "Settings saved"
-msgstr "Impostazioni salvate"
+#: packages/concrete_websocket/bootstrapper/src/routes/ConcreteAuthenticationRoutes.php:17
+msgid "Not logged"
+msgstr "Non loggato"
 
-#: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:9
-msgid ""
-"exec is disabled, this prevents websocket servers from starting.\n"
-"Contact your server administrator and ask them to change this setting.\n"
-"Concrete Websocket is safe and open-source, we use exec only and exclusively to start, shut down and control websocket servers.\n"
-"Edit your php.ini file (placed at %s) to enable it, see the FAQs on GitHub to see how to do it."
-msgstr ""
-"exec è disabilitato, questo impedisce di avviare dei server websocket.\n"
-"Contatta il tuo amministratore del server e chiedigli di modificare questa impostazione.\n"
-"Concrete Websocket è sicuro e open-source, utilizziamo exec solo ed esclusivamente per avviare, spegnere e controllare i server websocket.\n"
-"Modifica il file php.ini (posizione: %s) per abilitarlo, consulta le FAQ su GitHub per vedere come fare."
+#: packages/concrete_websocket/bootstrapper/src/Console.php:53
+msgid "PHP executable path not set."
+msgstr "Percorso dell'eseguibile PHP non impostato."
 
-#: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:10
-msgid "unknown path"
-msgstr "percorso sconosciuto"
+#: packages/concrete_websocket/bootstrapper/src/Console.php:108
+msgid "No function available to execute commands"
+msgstr "Nessun metodo disponibile per eseguire i comandi"
 
-#: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:23
-msgid "GitHub Page"
-msgstr "Pagina GitHub"
-
-#: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:30
-msgid "Available processes"
-msgstr "Processi disponibili"
-
-#: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:36
-msgid "Name"
-msgstr "Nome"
-
-#: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:37
-msgid "Status"
-msgstr "Stato"
-
-#: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:38
-msgid "Port"
-msgstr "Porta"
-
-#: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:39
-msgid "PID"
-msgstr "PID"
-
-#: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:49
-msgid "Turned off"
-msgstr "Spento"
-
-#: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:51
-msgid "Running"
-msgstr "In esecuzione"
-
-#: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:57
-msgid "Start process"
-msgstr "Avvia process"
-
-#: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:57
-msgid "Start"
-msgstr "Avvia"
-
-#: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:59
-msgid "Stop process"
-msgstr "Ferma processo"
-
-#: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:59
-msgid "Stop"
-msgstr "Ferma"
-
-#: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:66
-msgid "Restart process"
-msgstr "Riavvia processo"
-
-#: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:66
-msgid "Restart"
-msgstr "Riavvia"
-
-#: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:66
-msgid "No process available"
-msgstr "Nessun processo disponibile"
-
-#: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:93
-msgid "Settings"
-msgstr "Impostazioni"
-
-#: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:98
-#: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:101
-msgid "REST API Password"
-msgstr "Password REST API"
-
-#: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:104
-msgid ""
-"For security, Concrete Websocket requests a password for the REST API so malicious users can't start/stop servers without be authorized. "
-"Any calls to Concrete Websocket API <b>MUST</b> have the `%s` query param or the header `%s` set."
-msgstr ""
-"Per motivi di sicurezza, Concrete Websocket richiede una password per l'API REST in modo che gli utenti malintenzionati non possano avviare/arrestare i server senza essere autorizzati. "
-"Qualsiasi chiamata all'API di Concrete Websocket <b>DEVE AVERE</b> il query param `%s` o l'header `%s` impostato."
-
-#: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:107
-msgid "Save settings"
-msgstr ""
-
-#: packages/concrete_websocket/websocket/src/Process.php:30
+#: packages/concrete_websocket/bootstrapper/src/Process.php:32
+#, php-format
 msgid "Class %s does not exists."
 msgstr "La classe %s non esiste."
 
-#: packages/concrete_websocket/websocket/src/Process.php:73
+#: packages/concrete_websocket/bootstrapper/src/Process.php:67
 msgid "Error while starting process, pid not readable"
 msgstr "Errore durante l'avvio del processo, pid non disponibile."
 
-#: packages/concrete_websocket/bootstrapper/src/routes/middleware/PasswordMiddleware.php:17
-msgid "You are not authorized to access this resource."
-msgstr "Non sei autorizzato ad accedere a questa risorsa."
+#: packages/concrete_websocket/controllers/single_page/dashboard/websocket.php:23
+#, php-format
+msgid ""
+"exec, shell_exec and similar functions are disabled, this prevents WebSocket servers from starting.\n"
+"Contact your server administrator and ask him to change this setting.\n"
+"Concrete WebSocket is safe and open-source, we use exec (or similar) only and exclusively to start, shut-down and control WebSocket servers.\n"
+"Edit your php.ini file (placed at %s) to enable it, see the FAQs on GitHub to see how to do it."
+msgstr ""
+"exec, shell_exec e le funzioni equivalenti sono disabilitate, questo impedisce di avviare i server WebSocket.\n"
+"Contatta il tuo amministratore del server e chiedigli di modificare questa impostazione.\n"
+"Concrete WebSocket è sicuro e open-source, utilizziamo exec (o equivalenti) solo ed esclusivamente per avviare, spegnere e controllare i server WebSocket.\n"
+"Modifica il file php.ini (posizione: %s) per abilitarlo, consulta le FAQ su GitHub per vedere come fare."
+
+#: packages/concrete_websocket/controllers/single_page/dashboard/websocket.php:28
+msgid "unknown path"
+msgstr "percorso sconosciuto"
+
+#: packages/concrete_websocket/controllers/single_page/dashboard/websocket.php:47
+msgid "Invalid token. Please refresh the page and try again."
+msgstr "Token di sicurezza non valido. Perfavore, ricarica la pagina e riprova."
+
+#: packages/concrete_websocket/controllers/single_page/dashboard/websocket.php:51
+#, php-format
+msgid "The port must be a number between %s and %s."
+msgstr "La porta deve essere un numero tra %s e %s."
+
+#: packages/concrete_websocket/controllers/single_page/dashboard/websocket.php:138
+msgid "Settings saved"
+msgstr "Impostazioni salvate"
+
+#: packages/concrete_websocket/controllers/single_page/dashboard/websocket.php:147
+msgid "You must specify a REST API password."
+msgstr "Devi inserire una password per la REST API."
+
+#: packages/concrete_websocket/controllers/single_page/dashboard/websocket.php:150
+msgid "You must specify a valid PHP executable path."
+msgstr "Devi inserire un percorso valido dell'eseguibile PHP."
+
+#: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:17
+#: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:18
+msgid "GitHub Page"
+msgstr "Pagina GitHub"
+
+#: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:26
+msgid "Available processes"
+msgstr "Processi disponibili"
+
+#: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:32
+msgid "Name"
+msgstr "Nome"
+
+#: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:33
+msgid "Status"
+msgstr "Stato"
+
+#: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:34
+msgid "Port"
+msgstr "Porta"
+
+#: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:35
+msgid "PID"
+msgstr "PID"
+
+#: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:46
+msgid "Turned off"
+msgstr "Spento"
+
+#: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:48
+msgid "Running"
+msgstr "In esecuzione"
+
+#: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:73
+msgid "Start process"
+msgstr "Avvia processo"
+
+#: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:73
+msgid "Start"
+msgstr "Avvia"
+
+#: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:75
+msgid "Stop process"
+msgstr "Ferma processo"
+
+#: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:75
+msgid "Stop"
+msgstr "Ferma"
+
+#: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:76
+msgid "Restart process"
+msgstr "Riavvia processo"
+
+#: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:76
+msgid "Restart"
+msgstr "Riavvia"
+
+#: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:83
+msgid "No process available"
+msgstr "Nessun processo disponibile"
+
+#: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:95
+msgid "Settings"
+msgstr "Impostazioni"
+
+#: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:101
+#: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:104
+msgid "REST API Password"
+msgstr "Password REST API"
+
+#: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:107
+#, php-format
+msgid "For security, Concrete WebSocket requests a password for the REST API so malicious users can't start/stop servers without be authorized.<br/>Any calls to Concrete WebSocket API <b>MUST</b> have the <code>%s</code> query param or the header <code>%s</code> set."
+msgstr "Per motivi di sicurezza, Concrete WebSocket richiede una password per l'API REST in modo che gli utenti malintenzionati non possano avviare/arrestare i server senza essere autorizzati.<br/>Qualsiasi chiamata all'API di Concrete Websocket DEVE AVERE il query param <code>%s</code> o l'header <code>%s</code> impostato."
+
+#: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:112
+#: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:115
+msgid "PHP Executable Path"
+msgstr "Percorso eseguibile PHP"
+
+#: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:118
+msgid "To start the servers, Concrete WebSocket needs to know the PHP executable path.<br/><b>By default you should find the correct path already set</b> here but if you notice errors in starting the servers or you are on Windows systems, make sure that the path set here is correct."
+msgstr "Per avviare i server, Concrete WebSocket ha bisogno di conoscere il percorso eseguibile di PHP.<br/><b>Per impostazione predefinita dovresti trovare il percorso corretto già impostato qui sopra</b> ma se noti errori nell'avvio dei server o se ti trovi su sistemi Windows, assicurati che il percorso qui impostato sia corretto."
+
+#: packages/concrete_websocket/single_pages/dashboard/websocket/view.php:122
+msgid "Save settings"
+msgstr "Salva impostazioni"

@@ -1,11 +1,11 @@
 <?php
 
-namespace ConcreteWebsocket\Websocket\Routes;
+namespace ConcreteWebSocket\WebSocket\Routes;
 
-use ConcreteWebsocket\Websocket\Manager\ProcessManager;
-use ConcreteWebsocket\Websocket\Process;
-use ConcreteWebsocket\Websocket\Routes\Middleware\PasswordMiddleware;
-use ConcreteWebsocket\Websocket\Utils\JsonHandler;
+use ConcreteWebSocket\WebSocket\Manager\ProcessManager;
+use ConcreteWebSocket\WebSocket\Process;
+use ConcreteWebSocket\WebSocket\Routes\Middleware\PasswordMiddleware;
+use ConcreteWebSocket\WebSocket\Utils\JsonHandler;
 
 class ApiRoutes {
     public static function registerRoutes($router) {

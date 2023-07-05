@@ -1,12 +1,12 @@
 <?php
 
-namespace ConcreteWebsocket\Websocket\Routes\Middleware;
+namespace ConcreteWebSocket\WebSocket\Routes\Middleware;
 
 use Concrete\Core\Http\Middleware\MiddlewareInterface;
 use Concrete\Core\Http\Middleware\DelegateInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Concrete\Core\Error\ErrorList\ErrorList;
-use ConcreteWebsocket\Websocket\Manager\SettingsManager;
+use ConcreteWebSocket\WebSocket\Manager\SettingsManager;
 
 class PasswordMiddleware implements MiddlewareInterface {
     public function process(Request $request, DelegateInterface $frame) {

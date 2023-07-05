@@ -52,7 +52,7 @@ $app = \Concrete\Core\Support\Facade\Application::getFacadeApplication();
                                 <div>
                                     <span><?= $process->getPort(); ?></span>
                                     <button class="btn btn-info">
-                                        <i class="fa fa-pencil"></i>
+                                        <i class="fa fa-edit"></i>
                                     </button>
                                 </div>
                                 <form action="<?= $this->action('edit/' . $process->getID()); ?>" method="post">
@@ -80,7 +80,7 @@ $app = \Concrete\Core\Support\Facade\Application::getFacadeApplication();
                     <?php } ?>
                 <?php } else {  ?>
                     <tr>
-                        <td colspan="4" class="text-center"><?= t("No process available") ?></td>
+                        <td colspan="5" class="text-center"><?= t("No process available") ?></td>
                     </tr>
                 <?php } ?>
             </tbody>
@@ -97,16 +97,28 @@ $app = \Concrete\Core\Support\Facade\Application::getFacadeApplication();
     <form class="col-12" action="<?= $this->action('settings'); ?>" method="post">
         <?= $token->output('concrete_websocket_settings_form'); ?>
 
-        <div class="form-group">
+        <div class="form-group row">
             <label for="<?= CONCRETEWEBSOCKET_SETTINGS_API_PASSWORD; ?>" class="control-label col-sm-3"><?= t("REST API Password") ?></label>
             <div class="col-sm-9">
                 <div class="input-group">
-                    <input type="text" id="<?= CONCRETEWEBSOCKET_SETTINGS_API_PASSWORD; ?>" name="<?= CONCRETEWEBSOCKET_SETTINGS_API_PASSWORD; ?>" value="<?= $settings[CONCRETEWEBSOCKET_SETTINGS_API_PASSWORD]; ?>" class="form-control ccm-input-text" placeholder="<?= t("REST API Password") ?>" required />
+                    <input type="text" id="<?= CONCRETEWEBSOCKET_SETTINGS_API_PASSWORD; ?>" name="<?= CONCRETEWEBSOCKET_SETTINGS_API_PASSWORD; ?>" value="<?= isset($settings[CONCRETEWEBSOCKET_SETTINGS_API_PASSWORD]) ? $settings[CONCRETEWEBSOCKET_SETTINGS_API_PASSWORD] : ''; ?>" class="form-control ccm-input-text" placeholder="<?= t("REST API Password") ?>" required />
                     <span class="input-group-addon"><i class="fa fa-asterisk"></i></span>
                 </div>
-                <div class="help-block small"><?= t("For security, Concrete Websocket requests a password for the REST API so malicious users can't start/stop servers without be authorized. Any calls to Concrete Websocket API <b>MUST</b> have the `%s` query param or the header `%s` set.", CONCRETEWEBSOCKET_PASSWORD_PARAM, CONCRETEWEBSOCKET_PASSWORD_HEADER) ?></div>
+                <div class="help-block small"><?= t("For security, Concrete WebSocket requests a password for the REST API so malicious users can't start/stop servers without be authorized.<br/>Any calls to Concrete WebSocket API <b>MUST</b> have the <code>%s</code> query param or the header <code>%s</code> set.", CONCRETEWEBSOCKET_PASSWORD_PARAM, CONCRETEWEBSOCKET_PASSWORD_HEADER) ?></div>
             </div>
         </div>
+
+        <div class="form-group row">
+            <label for="<?= CONCRETEWEBSOCKET_SETTINGS_PHP_PATH; ?>" class="control-label col-sm-3"><?= t("PHP Executable Path") ?></label>
+            <div class="col-sm-9">
+                <div class="input-group">
+                    <input type="text" id="<?= CONCRETEWEBSOCKET_SETTINGS_PHP_PATH; ?>" name="<?= CONCRETEWEBSOCKET_SETTINGS_PHP_PATH; ?>" value="<?= isset($settings[CONCRETEWEBSOCKET_SETTINGS_PHP_PATH]) ? $settings[CONCRETEWEBSOCKET_SETTINGS_PHP_PATH] : ''; ?>" class="form-control ccm-input-text" placeholder="<?= t("PHP Executable Path") ?>" required />
+                    <span class="input-group-addon"><i class="fa fa-asterisk"></i></span>
+                </div>
+                <div class="help-block small"><?= t("To start the servers, Concrete WebSocket needs to know the PHP executable path.<br/><b>By default you should find the correct path already set</b> here but if you notice errors in starting the servers or you are on Windows systems, make sure that the path set here is correct.") ?></div>
+            </div>
+        </div>
+
         <button class="btn btn-primary" type="submit"><?= t("Save settings") ?></button>
     </form>
 </div>

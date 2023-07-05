@@ -1,6 +1,6 @@
 <?php
 
-namespace ConcreteWebsocket\Websocket\Middleware;
+namespace ConcreteWebSocket\WebSocket\Middleware;
 
 use mysqli;
 use Ratchet\ConnectionInterface;

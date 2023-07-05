@@ -1,6 +1,6 @@
 <?php
 
-namespace ConcreteWebsocket\Websocket\Routes;
+namespace ConcreteWebSocket\WebSocket\Routes;
 
 class ConcreteAuthenticationRoutes {
     public static function registerRoutes($router) {

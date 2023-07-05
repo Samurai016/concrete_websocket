@@ -1,9 +1,9 @@
 {
     "autoload": {
         "psr-4": {
-            "ConcreteWebsocket\\Websocket\\": "src",
-            "ConcreteWebsocket\\Websocket\\Middleware\\": "src\\middleware",
-            "ConcreteWebsocket\\Websocket\\Manager\\": "src\\manager"
+            "ConcreteWebSocket\\WebSocket\\": "src",
+            "ConcreteWebSocket\\WebSocket\\Middleware\\": "src\\middleware",
+            "ConcreteWebSocket\\WebSocket\\Manager\\": "src\\manager"
         }
     },
     "require": {

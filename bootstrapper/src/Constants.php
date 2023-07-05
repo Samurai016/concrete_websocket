@@ -1,6 +1,6 @@
 <?php
 
-namespace ConcreteWebsocket\Websocket;
+namespace ConcreteWebSocket\WebSocket;
 
 class Constants {
     public static function registerConstants() {
@@ -14,15 +14,16 @@ class Constants {
         defined('CONCRETEWEBSOCKET_PATH_SCAN') or define('CONCRETEWEBSOCKET_PATH_SCAN',  join(DIRECTORY_SEPARATOR, [CONCRETEWEBSOCKET_BASE_PATH, "application", "websocket"]));
         
         // Database tables
-        defined('CONCRETEWEBSOCKET_TABLE_PROCESSES') or define('CONCRETEWEBSOCKET_TABLE_PROCESSES', 'ConcreteWebsocketProcesses');
-        defined('CONCRETEWEBSOCKET_TABLE_SETTINGS') or define('CONCRETEWEBSOCKET_TABLE_SETTINGS', 'ConcreteWebsocketSettings');
+        defined('CONCRETEWEBSOCKET_TABLE_PROCESSES') or define('CONCRETEWEBSOCKET_TABLE_PROCESSES', 'ConcreteWebSocketProcesses');
+        defined('CONCRETEWEBSOCKET_TABLE_SETTINGS') or define('CONCRETEWEBSOCKET_TABLE_SETTINGS', 'ConcreteWebSocketSettings');
         
         // Settings
         defined('CONCRETEWEBSOCKET_SETTINGS_WEBHOOK') or define('CONCRETEWEBSOCKET_SETTINGS_WEBHOOK', "cw_authentication_webhook");
         defined('CONCRETEWEBSOCKET_SETTINGS_API_PASSWORD') or define('CONCRETEWEBSOCKET_SETTINGS_API_PASSWORD', "cw_api_password");
+        defined('CONCRETEWEBSOCKET_SETTINGS_PHP_PATH') or define('CONCRETEWEBSOCKET_SETTINGS_PHP_PATH', "cw_php_path");
 
         // Password Middleware
-        defined('CONCRETEWEBSOCKET_PASSWORD_HEADER') or define('CONCRETEWEBSOCKET_PASSWORD_HEADER', "X-Websocket-Password");
+        defined('CONCRETEWEBSOCKET_PASSWORD_HEADER') or define('CONCRETEWEBSOCKET_PASSWORD_HEADER', "X-WebSocket-Password");
         defined('CONCRETEWEBSOCKET_PASSWORD_PARAM') or define('CONCRETEWEBSOCKET_PASSWORD_PARAM', "pwd");
 
         // Miscellaneous
