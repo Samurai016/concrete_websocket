@@ -3,16 +3,27 @@
 ![License](https://img.shields.io/github/license/Samurai016/concrete_websocket?style=flat-square)
 ![Concrete CMS 8](https://img.shields.io/badge/Concrete%20CMS%208-c?style=flat-square&labelColor=%23017ddd&color=017ddd&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNSAyOSI+PGcgZGF0YS1uYW1lPSJMaXZlbGxvIDIiPjxwYXRoIGQ9Ik0xNyAyOGExMSAxMSAwIDAgMS0zIDEgMTIgMTIgMCAwIDEtOS0zYy0zLTItMy01LTEtOCAyLTIgNS0zIDgtMyAyIDAgOCAwIDYgMy0xIDMtNSAwLTggMS0yIDEtMyA0IDAgNmE2IDYgMCAwIDAgNi0xYzItMSA2LTggOS01IDEgMS02IDgtOCA5TTAgMTBsMS0zIDIgMyAxIDctNC03bTYtN2MxLTIgMiAwIDIgMnMzIDkgMSA5LTMtNy0zLThWM204LTMgMSA0YzAgMSAwIDEwLTEgOUwxMiAzYzAtMiAwLTMgMi0zbTQgNiAxLTNjMi0xIDIgMiAyIDNzLTEgOS0zIDljLTItMSAwLTggMC05IiBkYXRhLW5hbWU9IkxpdmVsbG8gMSIgc3R5bGU9ImZpbGw6I2ZmZjtmaWxsLXJ1bGU6ZXZlbm9kZCIvPjwvZz48L3N2Zz4=)
 ![Concrete CMS 9](https://img.shields.io/badge/Concrete%20CMS%209-c?style=flat-square&labelColor=%23017ddd&color=017ddd&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNSAyOSI+PGcgZGF0YS1uYW1lPSJMaXZlbGxvIDIiPjxwYXRoIGQ9Ik0xNyAyOGExMSAxMSAwIDAgMS0zIDEgMTIgMTIgMCAwIDEtOS0zYy0zLTItMy01LTEtOCAyLTIgNS0zIDgtMyAyIDAgOCAwIDYgMy0xIDMtNSAwLTggMS0yIDEtMyA0IDAgNmE2IDYgMCAwIDAgNi0xYzItMSA2LTggOS01IDEgMS02IDgtOCA5TTAgMTBsMS0zIDIgMyAxIDctNC03bTYtN2MxLTIgMiAwIDIgMnMzIDkgMSA5LTMtNy0zLThWM204LTMgMSA0YzAgMSAwIDEwLTEgOUwxMiAzYzAtMiAwLTMgMi0zbTQgNiAxLTNjMi0xIDIgMiAyIDNzLTEgOS0zIDljLTItMSAwLTggMC05IiBkYXRhLW5hbWU9IkxpdmVsbG8gMSIgc3R5bGU9ImZpbGw6I2ZmZjtmaWxsLXJ1bGU6ZXZlbm9kZCIvPjwvZz48L3N2Zz4=)   
+![WebSocket](https://img.shields.io/badge/WebSocket-c?style=flat-square&logoColor=ffffff&color=ff6600&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbDpzcGFjZT0icHJlc2VydmUiIHZpZXdCb3g9IjAgMCA0MjIgMzI1Ij48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMzE3IDI0M2g1MlYxMTZsLTU5LTU5LTM2IDM4IDQyIDQzdjEwNXptNTIgMjdIMTg2bC00My00NSAxOS0xOCAzNiAzNmg3NGwtNzItNzQgMTgtMTggNzIgNzN2LTc1bC0zNC0zNCAxOC0yMC05MS05MUgwbDUzIDUzaDEwOWwzNyAzOC01NSA1Ni00MC0zOFY4M0g1M3Y1Mmw5MSA5MC0zOCAzNiA1OSA2MGgyNTdsLTUzLTUxeiIvPjwvc3ZnPg==)  
 
 **Add blazing-fast WebSocket support to Concrete CMS with ease! 🌈**
 
 ![WebSocket Dashboard Screenshot](./docs/readme_screenshot.png)
 
+## 🎯 Features
+* 🌐 **Multiple WebSocket Servers**: Run and manage multiple servers simultaneously.
+* ⚡️ **Background Processes**: Keep your servers always online in the background.
+* 🔄 **Process Management**: Effortlessly start, stop, and manage server processes.
+* 🐧🪟 **Linux & Windows Support**: Seamlessly deploy on both operating systems. 
+* 🎨 **Customization**: Tailor server port configuration to suit your unique requirements.
+* 🧩 **Built-in Middlewares**: Enhance server functionality with ease.
+* 🔒 **Secure REST API**: Manage servers remotely through a secure API.
+* 📚 **Comprehensive Docs & Examples**: Access detailed documentation and practical example.
+
 ## 🚀 Installation
-📥 Download the [latest release](https://github.com/Samurai016/concrete_websocket/releases/latest) package (*concrete_websocket.zip*)  
-📂 Unzip the package in your /packages directory  
-🌐 Visit your website's "Extend Concrete" page  
-🚀 Install the package.  
+* 📥 **Download** the [latest release](https://github.com/Samurai016/concrete_websocket/releases/latest) package (*concrete_websocket.zip*)  
+* 📂 **Unzip** the package in your /packages directory  
+* 🌐 **Visit** your website's "Extend Concrete" page  
+* 🚀 **Install** the package.  
 
 ## 📚 Usage
 Run a custom WebSocket server effortlessly with our package. Based on [Ratchet PHP](http://socketo.me/), it opens up a world of real-time possibilities for your Concrete CMS site. 🚀  
@@ -87,7 +98,7 @@ You can edit php.ini for each site by modifying the field `Custom php.ini settin
 
 If you've made the changes but don't see them applied to your site, you may need to restart your webserver. 🔄
 
-## ❌ I am unable to connect to websocket due to insecure connection  
+## ❌ I am unable to connect to WebSocket server due to insecure connection  
 When you try to connect to a `ws://` unsecure connection from an `https://` secure connection, you may run into the following error message in the console:
 ```text
 Mixed Content: The page at '...' was loaded over HTTPS, but attempted to connect to the insecure WebSocket endpoint 'ws://...'. This request has been blocked; this endpoint must be available over WSS.
@@ -110,3 +121,29 @@ For Apache server (source: [StackOverflow](https://stackoverflow.com/questions/1
 * Now, instead of connecting to `wss://yourdomain.com:port/`, connect to `wss://yourdomain.com/wss` (without specifying the port and add the /wss path) 🔒
 
 For Nginx users, [this solution](https://stackoverflow.com/questions/16979793/php-ratchet-websocket-ssl-connect#answer-43012985) may work, but I haven't personally tested it, so I can't guarantee its effectiveness. 🚀
+
+## 🔍 concrete_websocket can't find my PHP executable path.
+To configure concrete_websocket properly, you need to provide the PHP executable path of your server.  
+During the package installation, we attempt to detect it automatically, but **there are cases where it might not be found**.  
+In such situations, we ask you to manually provide the path in the WebSocket Dashboard settings form. 🛠️
+
+❓**But how can you find your PHP executable path?**  
+Here are the steps depending on your operating system and installation method:
+
+### 🪟 For Windows servers
+1. Open the `cmd` command prompt.
+2. Enter the following command in the prompt and press `Enter`:
+   ```bash
+   where php
+   ```
+   This command will display the path to the PHP executable. Copy and paste this path into the Concrete Dashboard settings form. 🖥️💻
+
+### 🐧 For Linux servers
+1. Open the terminal.
+2. Enter the following command in the terminal and press `Enter`:
+   ```bash
+   which php
+   ```
+   This command will display the path to the PHP executable. Copy and paste this path into the Concrete Dashboard settings form. 🖥️💻
+
+Keep in mind that the provided solution is general and might not be applicable to your specific server setup. The exact answer depends on your configuration. ✨

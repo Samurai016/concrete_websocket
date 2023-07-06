@@ -311,7 +311,7 @@
           },
           "class": {
             "type": "string",
-            "example": "/to/application/websocket/ExampleWebSocketServer.php",
+            "example": "/to/application/websocket/ExampleSocketServer.php",
             "description": "🌐 The path of the server class."
           },
           "status": {
