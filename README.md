@@ -6,6 +6,8 @@
 
 **Add blazing-fast WebSocket support to Concrete CMS with ease! 🌈**
 
+![WebSocket Dashboard Screenshot](./docs/readme_screenshot.png)
+
 ## 🚀 Installation
 📥 Download the [latest release](https://github.com/Samurai016/concrete_websocket/releases/latest) package (*concrete_websocket.zip*)  
 📂 Unzip the package in your /packages directory  
