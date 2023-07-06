@@ -84,7 +84,7 @@ Refer to the [wiki](https://github.com/Samurai016/concrete_websocket/wiki/📚-R
 
 ## 🤔 FAQ
 
-## ❓ I got the `exec` disabled error, how can I enable it?
+### ❓ I got the `exec` disabled error, how can I enable it?
 Enabling `exec` is crucial for concrete_websocket, and the method to enable it varies among webservers.  
 
 In general, you have to edit the `disable_functions` directive in your `php.ini` configuration file.  
@@ -98,7 +98,7 @@ You can edit php.ini for each site by modifying the field `Custom php.ini settin
 
 If you've made the changes but don't see them applied to your site, you may need to restart your webserver. 🔄
 
-## ❌ I am unable to connect to WebSocket server due to insecure connection  
+### ❌ I am unable to connect to WebSocket server due to insecure connection  
 When you try to connect to a `ws://` unsecure connection from an `https://` secure connection, you may run into the following error message in the console:
 ```text
 Mixed Content: The page at '...' was loaded over HTTPS, but attempted to connect to the insecure WebSocket endpoint 'ws://...'. This request has been blocked; this endpoint must be available over WSS.
@@ -122,7 +122,7 @@ For Apache server (source: [StackOverflow](https://stackoverflow.com/questions/1
 
 For Nginx users, [this solution](https://stackoverflow.com/questions/16979793/php-ratchet-websocket-ssl-connect#answer-43012985) may work, but I haven't personally tested it, so I can't guarantee its effectiveness. 🚀
 
-## 🔍 concrete_websocket can't find my PHP executable path.
+### 🔍 concrete_websocket can't find my PHP executable path.
 To configure concrete_websocket properly, you need to provide the PHP executable path of your server.  
 During the package installation, we attempt to detect it automatically, but **there are cases where it might not be found**.  
 In such situations, we ask you to manually provide the path in the WebSocket Dashboard settings form. 🛠️
@@ -130,7 +130,7 @@ In such situations, we ask you to manually provide the path in the WebSocket Das
 ❓**But how can you find your PHP executable path?**  
 Here are the steps depending on your operating system and installation method:
 
-### 🪟 For Windows servers
+#### 🪟 For Windows servers
 1. Open the `cmd` command prompt.
 2. Enter the following command in the prompt and press `Enter`:
    ```bash
@@ -138,7 +138,7 @@ Here are the steps depending on your operating system and installation method:
    ```
    This command will display the path to the PHP executable. Copy and paste this path into the Concrete Dashboard settings form. 🖥️💻
 
-### 🐧 For Linux servers
+#### 🐧 For Linux servers
 1. Open the terminal.
 2. Enter the following command in the terminal and press `Enter`:
    ```bash
