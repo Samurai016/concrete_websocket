@@ -85,7 +85,16 @@ Refer to the [wiki](https://github.com/Samurai016/concrete_websocket/wiki/📚-R
 ## 🤔 FAQ
 
 ### ❓ I got the `exec` disabled error, how can I enable it?
-Enabling `exec` is crucial for concrete_websocket, and the method to enable it varies among webservers.  
+Enabling `exec` (or its equivalents) is crucial for concrete_websocket, and the method to enable it varies among webservers.  
+
+> concrete_websocket offers support for multiple methods, so it is not necessarily mandatory to have exec enabled but it is enough that even only one of the supported methods is.  
+> **The supported methods are:**
+> * [`exec`](https://www.php.net/manual/en/function.exec.php)
+> * [`shell_exec`](https://www.php.net/manual/en/function.shell-exec.php)
+> * [`system`](https://www.php.net/manual/en/function.system.php)
+> * [`proc_open`](https://www.php.net/manual/en/function.proc-open.php)
+> * [`passthru`](https://www.php.net/manual/en/function.passthru.php)
+> * [`popen`](https://www.php.net/manual/en/function.popen.php)
 
 In general, you have to edit the `disable_functions` directive in your `php.ini` configuration file.  
 Refer to your webserver's documentation for more information.

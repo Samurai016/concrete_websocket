@@ -32,7 +32,6 @@ class WebSocket extends DashboardPageController {
         $this->set('errors', $errors);
         $this->set('processes', $processes);
         $this->set('settings', $settings);
-        $this->requireAsset('css', 'concrete_websocket_css');
     }
 
     public function edit($id) {

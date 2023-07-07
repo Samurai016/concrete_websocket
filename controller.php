@@ -64,10 +64,6 @@ class Controller extends Package {
         // Register constants
         Constants::registerConstants();
 
-        // Register assets
-        $al = AssetList::getInstance();
-        $al->register('css', 'concrete_websocket_css', 'css/concrete_websocket.css', array(), $this);
-
         // Register routes
         SettingsManager::set(CONCRETEWEBSOCKET_SETTINGS_WEBHOOK, URL::to(CONCRETEWEBSOCKET_CONCRETE_AUTH_ENDPOINT));
         $router = $this->app->make('router');
