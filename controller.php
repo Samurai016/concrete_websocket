@@ -3,7 +3,6 @@
 namespace Concrete\Package\ConcreteWebSocket;
 
 use Concrete\Core\Package\Package;
-use Concrete\Core\Asset\AssetList;
 use Concrete\Core\Support\Facade\Url;
 use Concrete\Core\Page\Single as SinglePage;
 use ConcreteWebSocket\WebSocket\Constants;

@@ -4,6 +4,8 @@ namespace ConcreteWebSocket\WebSocket;
 
 class Constants {
     public static function registerConstants() {
+        defined('CONCRETEWEBSOCKET_PACKAGE_HANDLE') or define('CONCRETEWEBSOCKET_PACKAGE_HANDLE', 'concrete_websocket');
+
         // Paths
         // I generate paths by relative paths because I don't have access to the Concrete CMS constants
         defined('CONCRETEWEBSOCKET_BASE_PATH') or define('CONCRETEWEBSOCKET_BASE_PATH', realpath(join(DIRECTORY_SEPARATOR, [__DIR__,'..','..', '..', '..'])));

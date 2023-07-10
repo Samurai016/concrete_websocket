@@ -4,6 +4,7 @@ namespace Concrete\Package\ConcreteWebSocket\Controller\SinglePage\Dashboard;
 
 use Concrete\Core\Page\Controller\DashboardPageController;
 use Concrete\Core\Routing\Redirect;
+use Concrete\Core\Package\Package;
 use ConcreteWebSocket\WebSocket\Console;
 use ConcreteWebSocket\WebSocket\Process;
 use ConcreteWebSocket\WebSocket\Manager\ProcessManager;
@@ -26,6 +27,11 @@ class WebSocket extends DashboardPageController {
                 $iniPaths .= ", " . $extraIni;
             }
             $errors[] = sprintf($errorMessage, count($iniPaths) > 0 ? implode(',', $iniPaths) : t('unknown path'));
+        }
+
+        if ($this->checkForUpdates()) {
+            $this->set('message', t('A new version of Concrete WebSocket (<b>%s</b>) is available, <a href="%s" target="_blank">please update it here</a>.', $this->get('latestVersion'), 'https://github.com/Samurai016/concrete_websocket/releases/latest'));
+            $this->set('messageIsHTML', true);
         }
 
         $this->set('canExec', $canExec);
@@ -150,5 +156,31 @@ class WebSocket extends DashboardPageController {
         }
 
         return $e;
+    }
+
+    private function checkForUpdates() {
+        try {
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, 'https://api.github.com/repos/Samurai016/concrete_websocket/releases/latest');
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($ch, CURLOPT_USERAGENT, 'Concrete WebSocket');
+            if (empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] == 'off') {
+                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+            }
+            $res = curl_exec($ch);
+            $res = json_decode($res, true);
+            $latestVersion = $res['tag_name'];
+    
+            $package = Package::getByHandle(CONCRETEWEBSOCKET_PACKAGE_HANDLE);
+            $currentVersion = $package->getPackageVersion();
+        } catch (\Throwable $th) {
+            return false;
+        }
+
+        if (version_compare($currentVersion, $latestVersion, '<')) {
+            $this->set('latestVersion', $latestVersion);
+            return true;
+        }
+        return false;
     }
 }

@@ -6,7 +6,6 @@ use Concrete\Core\View\View;
 View::element('system_errors', [
     'format' => 'block',
     'error' => $errors,
-    'message' => isset($message) ? $message : null,
 ]);
 
 $app = \Concrete\Core\Support\Facade\Application::getFacadeApplication();
