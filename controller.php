@@ -31,6 +31,10 @@ class Controller extends Package {
         return t('Add WebSocket support.');
     }
 
+    public function getPhpVersionRequired() {
+        return '7.0.0';
+    }
+
     public function install() {
         // Check PHP version
         if (version_compare(phpversion(), '7.0.0', '>') < 0) {
